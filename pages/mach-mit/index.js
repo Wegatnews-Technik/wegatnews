@@ -35,6 +35,10 @@ export default function InformativIndex() {
               <b>Platz 3</b> der Rechtschreibfehlerfinder: Amaya mit 2
               gefundenen Fehlern
             </p>
+            <p>
+              <b>Platz 4</b> der Rechtschreibfehlerfinder: Ouijdan mit 2
+              gefundenen Fehlern
+            </p>
           </div>
           <div className="image-or-text">
             <h2>Inhaltliche Fehler Zähler</h2>
