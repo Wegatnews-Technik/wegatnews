@@ -18,7 +18,7 @@ export default function InformativIndex() {
           </div>
           <div className="image-or-text">
             <h2>Rechtschreibfehler Zähler</h2>
-            <h3>86</h3>
+            <h3>88</h3>
             <p>
               Rechtschreibfehler wurden bisher gefunden. Vielen Dank an alle
               fleißigen Leser*innen, die uns auf Fehler aufmerksam machen!
