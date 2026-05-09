@@ -36,7 +36,7 @@ export default function InformativIndex() {
               gefundenen Fehlern
             </p>
             <p>
-              <b>Platz 4</b> der Rechtschreibfehlerfinder: Ouijdan mit 2
+              <b>Platz 3</b> der Rechtschreibfehlerfinder: Ouijdan mit 2
               gefundenen Fehlern
             </p>
           </div>
