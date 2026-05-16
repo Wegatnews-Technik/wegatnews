@@ -33,7 +33,7 @@ export default function PostCard({ post }) {
       <div className="meta">
         {new Date(post.date).toLocaleDateString("de-DE", {
           day: "numeric",
-          month: "numeric",
+          month: "long",
           year: "numeric",
         })}{" "}
         · {post.author}
