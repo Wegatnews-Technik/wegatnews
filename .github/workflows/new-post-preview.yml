@@ -13,12 +13,13 @@ jobs:
 
     steps:
       - name: Repository auschecken
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          token: ${{ secrets.POST_BOT_TOKEN }}
 
       - name: Node installieren
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -76,6 +77,23 @@ jobs:
       - name: Build testen
         run: npm run build
 
+      - name: /neuer-post leeren
+        run: |
+          set -e
+
+          ARTICLE_NUMBER="$(cat article_number.txt)"
+
+          rm -f "neuer-post/${ARTICLE_NUMBER}.md"
+          rm -f "neuer-post/${ARTICLE_NUMBER}.webp"
+
+          # Falls weitere temporäre Dateien im Ordner liegen, diese ebenfalls löschen.
+          find neuer-post -mindepth 1 -maxdepth 1 -type f -delete
+
+          # Ordner im Repo behalten, falls er sonst leer wäre.
+          touch neuer-post/.gitkeep
+
+          echo "/neuer-post wurde geleert."
+
       - name: Branch committen und pushen
         run: |
           set -e
@@ -88,14 +106,16 @@ jobs:
 
           git checkout -b "$BRANCH_NAME"
 
-          git add "posts/${ARTICLE_NUMBER}.md" "public/article-images/${ARTICLE_NUMBER}.webp"
+          git add "posts/${ARTICLE_NUMBER}.md"
+          git add "public/article-images/${ARTICLE_NUMBER}.webp"
+          git add neuer-post
 
           git commit -m "Add article ${ARTICLE_NUMBER}"
-          git push origin "$BRANCH_NAME"
+          git push --force-with-lease origin "$BRANCH_NAME"
 
       - name: Pull Request erstellen
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.POST_BOT_TOKEN }}
         run: |
           set -e
 
@@ -112,8 +132,10 @@ jobs:
           - posts/${ARTICLE_NUMBER}.md
           - public/article-images/${ARTICLE_NUMBER}.webp
 
+          Der Ordner /neuer-post wird in diesem Pull Request geleert.
+
           Netlify sollte für diesen Pull Request automatisch einen Deploy Preview erzeugen.
 
-          Wenn der Preview passt, kommentieren:
+          Wenn der Preview passt, entweder den grünen Merge-Button nutzen oder kommentieren:
 
           /publish"
