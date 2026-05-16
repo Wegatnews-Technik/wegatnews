@@ -31,7 +31,12 @@ export default function PostCard({ post }) {
       <p>{post.preview}...</p>
 
       <div className="meta">
-        {new Date(post.date).toLocaleDateString()} · {post.author}
+        {new Date(post.date).toLocaleDateString("de-DE", {
+          day: "numeric",
+          month: "numeric",
+          year: "numeric",
+        })}{" "}
+        · {post.author}
       </div>
 
       <div className="blog-entry-actions">
