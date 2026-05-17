@@ -38,7 +38,7 @@ export default function InformativIndex() {
 
         <p>
           <b>Inhalte und Artikel:</b> Ouijdan Hussein sowie die jeweiligen
-          Autor*innen der Beiträge
+          Autor*innen der Beiträge, eine Liste aller Redakteure folgt bald.
         </p>
 
         <p>
