@@ -235,3 +235,46 @@
   border-radius: 6px;
   border: 1px solid #ddd;
 }
+
+.editor-ckeditor {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.editor-ckeditor .ck-editor__editable {
+  min-height: 320px;
+  font: var(--p);
+  line-height: 1.7;
+}
+
+.editor-ckeditor .ck-content {
+  color: var(--color2);
+}
+
+.editor-ckeditor .ck-content h2 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.editor-ckeditor .ck-content h3 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.editor-ckeditor .ck-content p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.editor-ckeditor .ck-content ul,
+.editor-ckeditor .ck-content ol {
+  padding-left: 1.5rem;
+}
+
+.editor-loading {
+  display: flex;
+  align-items: center;
+  min-height: 220px;
+  color: var(--color3);
+}

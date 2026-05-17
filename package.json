@@ -11,6 +11,8 @@
     "generate-rss": "node scripts/generate-rss.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^11.1.2",
+    "ckeditor5": "^48.1.0",
     "feed": "^5.2.1",
     "gray-matter": "^4.0.3",
     "next": "16.1.1",
