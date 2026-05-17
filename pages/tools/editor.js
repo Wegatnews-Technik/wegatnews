@@ -309,8 +309,7 @@ export default function EditorPage() {
       ) : null}
 
       <p>
-        Text aus Word direkt hier einfügen. Der Editor bereinigt Word-Paste und
-        erzeugt daraus Markdown.
+        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht. 
       </p>
 
       <MarkdownCkEditor value={contentMarkdown} onChange={setContentMarkdown} />
