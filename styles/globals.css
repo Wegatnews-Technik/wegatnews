@@ -237,10 +237,11 @@ section {
 }
 
 .tag {
-    background-color: lightblue;
-    border: 1px solid blue;
+    color: #ffffff;
+    background-color: #0077ff;
     padding: 5px;
     margin: 5px;
+    border-radius: 25px;
 }
 
 @media (min-width: 769px) {
