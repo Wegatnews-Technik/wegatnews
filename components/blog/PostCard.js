@@ -37,6 +37,7 @@ export default function PostCard({ post }) {
           year: "numeric",
         })}{" "}
         · {post.author}
+        {post.tags.map((tag) => <span className="tag">{tag}</span>) }
       </div>
 
       <div className="blog-entry-actions">

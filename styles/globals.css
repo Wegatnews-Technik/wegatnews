@@ -236,6 +236,13 @@ section {
   text-align: center;
 }
 
+.tag {
+    background-color: lightblue;
+    border: 1px solid blue;
+    padding: 5px;
+    margin: 5px;
+}
+
 @media (min-width: 769px) {
   .blog-entry {
     display: flex;
