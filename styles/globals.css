@@ -93,6 +93,7 @@ section {
 .welcome-container {
   text-align: center;
   padding: 40px 20px;
+  padding-bottom: 0px;
 }
 
 .blog-section {

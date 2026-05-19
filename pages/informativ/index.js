@@ -34,11 +34,12 @@ function NewestPosts({ posts }) {
 export default function InformativIndex({ posts }) {
   return (
     <main>
-      <section className="archiv">
+      <div className="welcome-container">
         <h1>Informativ 📖</h1>
         <p>Berichte, Argumentationen, Stellungnahmen. Sachliche Diskussionen</p>
-        <NewestPosts posts={posts} />
-      </section>
+      </div>
+
+      <NewestPosts posts={posts} />
     </main>
   );
 }
