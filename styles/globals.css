@@ -235,13 +235,24 @@ section {
   gap: 20px;
   text-align: center;
 }
-
 .tag {
     color: #ffffff;
     background-color: #0077ff;
     padding: 5px;
     margin: 5px;
     border-radius: 25px;
+}
+
+.Informativ{
+    background-color: #0077ff;
+}
+
+.Meinung{
+    background-color: #ff3500;
+}
+
+.Umfrage{
+    background-color: #77dd00;
 }
 
 @media (min-width: 769px) {

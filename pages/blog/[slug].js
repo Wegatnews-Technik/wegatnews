@@ -47,7 +47,7 @@ export default function Post({ post }) {
               >
                 <FiShare2 aria-hidden="true" />
               </button>
-              {post.tags.map((tag) => <span className="tag">{tag}</span>) }
+              {post.tags.map((tag) => <span key={tag} className={tag + " tag"}>{tag}</span>) }
             </div>
 
             <div
