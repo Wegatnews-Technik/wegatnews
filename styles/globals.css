@@ -235,6 +235,7 @@ section {
   gap: 20px;
   text-align: center;
 }
+
 .tag {
     color: #ffffff;
     background-color: #0077ff;
@@ -244,15 +245,15 @@ section {
 }
 
 .Informativ{
-    background-color: #0077ff;
+    background-color: #2F80A8;
 }
 
 .Meinung{
-    background-color: #ff3500;
+    background-color: #E53935;
 }
 
 .Umfrage{
-    background-color: #77dd00;
+    background-color: #2EAD5B;
 }
 
 @media (min-width: 769px) {
