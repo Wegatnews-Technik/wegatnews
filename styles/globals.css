@@ -151,7 +151,7 @@ section {
   color: #999;
 }
 
-.blog-entry a {
+.blog-entry a:not(.tag) {
   display: inline-block;
   padding: 8px 16px;
   background-color: #0077ff;
@@ -161,7 +161,7 @@ section {
   font-size: 0.9rem;
 }
 
-.blog-entry a:hover {
+.blog-entry a:hover:not(.tag) {
   background-color: #005fcc;
 }
 
@@ -242,6 +242,11 @@ section {
     padding: 5px;
     margin: 5px;
     border-radius: 25px;
+    text-decoration: none;
+}
+
+.tag:hover {
+    padding: 6px;
 }
 
 .Informativ{

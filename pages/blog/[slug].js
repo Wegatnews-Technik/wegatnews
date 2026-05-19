@@ -47,7 +47,10 @@ export default function Post({ post }) {
               >
                 <FiShare2 aria-hidden="true" />
               </button>
-              {post.tags.map((tag) => <span key={tag} className={tag + " tag"}>{tag}</span>) }
+              {post.tags.map((tag) =>
+                <Link key={tag} className={tag + " tag"} href={"/" + (tag == "Umfrage" ? "umfragen" : tag.toLowerCase())}>
+                  {tag}
+                </Link>)}
             </div>
 
             <div
