@@ -108,7 +108,7 @@ export default function EditorPage() {
   }, [title]);
 
   const addTag = () => {
-    const cleaned = normalizeText(tagInput, { singleLine: true }).toLowerCase();
+    const cleaned = normalizeText(tagInput, { singleLine: true });
 
     if (!cleaned) return;
 
@@ -309,7 +309,7 @@ export default function EditorPage() {
       ) : null}
 
       <p>
-        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht. 
+        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht.
       </p>
 
       <MarkdownCkEditor value={contentMarkdown} onChange={setContentMarkdown} />
