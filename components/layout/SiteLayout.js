@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { href: "/mach-mit", label: "Mach mit👋" },
 ];
 
-export default function SiteLayout({ children }) {
+export default function SiteLayout({ children, posts }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -17,6 +17,21 @@ export default function SiteLayout({ children }) {
     document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, []);
+
+  function search() {
+    const search_string = document.getElementById("search-bar").value;
+    const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
+    let found_posts = new Array;
+    console.log(all_posts);
+    for (var i = 0; i < all_posts.length; i++) {
+      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
+      if (post_contents.search(search_string) != -1) {
+        const finding = all_posts[i];
+        found_posts = found_posts.concat(finding);
+      }
+    }
+    console.log(found_posts);
+  }
 
   return (
     <>
@@ -53,6 +68,8 @@ export default function SiteLayout({ children }) {
           </Link>
 
           <ul>
+            <input type="text" id="search-bar" />
+            <button id="search" onClick={search}>Suche: </button>
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link href={item.href}>{item.label}</Link>
