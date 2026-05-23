@@ -20,9 +20,9 @@ export default function SiteLayout({ children, posts }) {
 
   function search() {
     const search_string = document.getElementById("search-bar").value;
+    if (!search_string) return;
     const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
     let found_posts = new Array;
-    console.log(all_posts);
     for (var i = 0; i < all_posts.length; i++) {
       var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
       if (post_contents.search(search_string) != -1) {
@@ -30,7 +30,18 @@ export default function SiteLayout({ children, posts }) {
         found_posts = found_posts.concat(finding);
       }
     }
-    console.log(found_posts);
+    let results = document.createElement("ul");
+    for (let i = 0; i < found_posts.length; i++) {
+      let list_item = document.createElement("li");
+      let link = document.createElement("a");
+      link.href = "/blog/" + found_posts[i].slug;
+      link.innerHTML = found_posts[i].title;
+      list_item.appendChild(link);
+      results.appendChild(list_item);
+    }
+    let results_div = document.getElementById("search-results");
+    results_div.innerHTML = "";
+    results_div.appendChild(results);
   }
 
   return (
@@ -100,6 +111,8 @@ export default function SiteLayout({ children, posts }) {
           </ul>
         </div>
       </header>
+
+      <div id="search-results"></div>
 
       {children}
 
