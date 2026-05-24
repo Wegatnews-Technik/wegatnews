@@ -49,7 +49,7 @@ export default function SiteLayout({ children, posts }) {
     let results = document.createElement("ul");
     for (var i = 0; i < all_posts.length; i++) {
       var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
-      if (post_contents.search(search_string) != -1) {
+      if (post_contents.toLowerCase().search(search_string.toLowerCase()) != -1) {
         const finding = all_posts[i];
         let list_item = document.createElement("li");
         let link = document.createElement("a");
