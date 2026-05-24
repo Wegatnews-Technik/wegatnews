@@ -26,6 +26,13 @@ export default function SiteLayout({ children, posts }) {
           document.getElementById("search-button").click();
         }
       });
+      let all_links = document.getElementsByTagName("a");
+      for (let i=0; i < all_links.length; i++) {
+        all_links[i].addEventListener("click", () => {
+          document.getElementById("search-bar").value = "";
+          document.getElementById("search-results").innerHTML = "";
+        });
+      }
     }
   });
 
