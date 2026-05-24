@@ -30,6 +30,7 @@ export default function SiteLayout({ children, posts }) {
         const finding = all_posts[i];
         let list_item = document.createElement("li");
         let link = document.createElement("a");
+        link.target = "_blank";
         link.href = "/blog/" + finding.slug;
         link.innerHTML = finding.title;
         list_item.appendChild(link);
