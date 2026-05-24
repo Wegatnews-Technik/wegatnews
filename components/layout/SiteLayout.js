@@ -21,7 +21,7 @@ export default function SiteLayout({ children, posts }) {
   function search() {
     const search_string = document.getElementById("search-bar").value.trim();
     if (!search_string) return;
-    const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
+    const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
     let results = document.createElement("ul");
     for (var i = 0; i < all_posts.length; i++) {
       var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
@@ -108,7 +108,7 @@ export default function SiteLayout({ children, posts }) {
       </header>
 
       {
-        !posts.post ? (
+        posts.newestPosts || posts.posts ? (
           <>
             <div id="search">
               <input type="text" id="search-bar" />
