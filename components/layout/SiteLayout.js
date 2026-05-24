@@ -107,11 +107,17 @@ export default function SiteLayout({ children, posts }) {
         </div>
       </header>
 
-      <div id="search">
-        <input type="text" id="search-bar" />
-        <button id="search" onClick={search}>Suche: </button>
-      </div>
-      <div id="search-results"></div>
+      {
+        !posts.post ? (
+          <>
+            <div id="search">
+              <input type="text" id="search-bar" />
+              <button id="search" onClick={search}>Suche: </button>
+            </div>
+            <div id="search-results"></div>
+          </>
+        ) : (<></>)
+      }
 
       {children}
 
