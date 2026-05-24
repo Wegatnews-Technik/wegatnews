@@ -22,7 +22,6 @@ export default function SiteLayout({ children, posts }) {
     const search_string = document.getElementById("search-bar").value;
     if (!search_string) return;
     const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
-    let found_posts = new Array;
     let results = document.createElement("ul");
     for (var i = 0; i < all_posts.length; i++) {
       var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
@@ -38,7 +37,7 @@ export default function SiteLayout({ children, posts }) {
       }
     }
     let results_div = document.getElementById("search-results");
-    results_div.innerHTML = "";
+    results_div.innerHTML = "<h3>Suchergebnisse: <h3>";
     results_div.appendChild(results);
   }
 
@@ -77,8 +76,6 @@ export default function SiteLayout({ children, posts }) {
           </Link>
 
           <ul>
-            <input type="text" id="search-bar" />
-            <button id="search" onClick={search}>Suche: </button>
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link href={item.href}>{item.label}</Link>
@@ -110,6 +107,10 @@ export default function SiteLayout({ children, posts }) {
         </div>
       </header>
 
+      <div id="search">
+        <input type="text" id="search-bar" />
+        <button id="search" onClick={search}>Suche: </button>
+      </div>
       <div id="search-results"></div>
 
       {children}

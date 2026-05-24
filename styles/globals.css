@@ -73,6 +73,11 @@ section {
   width: 100%;
 }
 
+#search {
+    margin: 10px;
+    text-align: center;
+}
+
 .artikel-lesen {
   gap: clamp(4px, 2vw, 40px);
   text-align: left;
