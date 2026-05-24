@@ -23,21 +23,18 @@ export default function SiteLayout({ children, posts }) {
     if (!search_string) return;
     const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
     let found_posts = new Array;
+    let results = document.createElement("ul");
     for (var i = 0; i < all_posts.length; i++) {
       var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
       if (post_contents.search(search_string) != -1) {
         const finding = all_posts[i];
-        found_posts = found_posts.concat(finding);
+        let list_item = document.createElement("li");
+        let link = document.createElement("a");
+        link.href = "/blog/" + finding.slug;
+        link.innerHTML = finding.title;
+        list_item.appendChild(link);
+        results.appendChild(list_item);
       }
-    }
-    let results = document.createElement("ul");
-    for (let i = 0; i < found_posts.length; i++) {
-      let list_item = document.createElement("li");
-      let link = document.createElement("a");
-      link.href = "/blog/" + found_posts[i].slug;
-      link.innerHTML = found_posts[i].title;
-      list_item.appendChild(link);
-      results.appendChild(list_item);
     }
     let results_div = document.getElementById("search-results");
     results_div.innerHTML = "";
