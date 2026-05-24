@@ -18,6 +18,17 @@ export default function SiteLayout({ children, posts }) {
     return () => document.removeEventListener("click", closeMenu);
   }, []);
 
+  useEffect(() => {
+    if (posts.newestPosts || posts.posts) {
+      var input = document.getElementById("search-bar");
+      input.addEventListener("keypress", function (event) {
+        if (event.key == "Enter") {
+          document.getElementById("search-button").click();
+        }
+      });
+    }
+  });
+
   function search() {
     const search_string = document.getElementById("search-bar").value.trim();
     if (!search_string) return;
@@ -112,7 +123,7 @@ export default function SiteLayout({ children, posts }) {
           <>
             <div id="search">
               <input type="text" id="search-bar" />
-              <button id="search" onClick={search}>Suche: </button>
+              <button id="search-button" onClick={search}>Suche: </button>
             </div>
             <div id="search-results"></div>
           </>
