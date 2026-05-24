@@ -27,12 +27,18 @@ export default function SiteLayout({ children, posts }) {
         }
       });
       let all_links = document.getElementsByTagName("a");
-      for (let i=0; i < all_links.length; i++) {
-        all_links[i].addEventListener("click", () => {
-          document.getElementById("search-bar").value = "";
-          document.getElementById("search-results").innerHTML = "";
-        });
+      const reset_search = () => {
+        document.getElementById("search-bar").value = "";
+        document.getElementById("search-results").innerHTML = "";
       }
+      for (let i=0; i < all_links.length; i++) {
+        all_links[i].addEventListener("click", () => reset_search);
+      }
+      return () => {
+        for (let i = 0; i < all_links.length; i++) {
+          all_links[i].removeEventListener("click", reset_search);
+        }
+      };
     }
   });
 
