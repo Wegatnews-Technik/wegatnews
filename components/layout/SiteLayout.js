@@ -19,7 +19,7 @@ export default function SiteLayout({ children, posts }) {
   }, []);
 
   function search() {
-    const search_string = document.getElementById("search-bar").value;
+    const search_string = document.getElementById("search-bar").value.trim();
     if (!search_string) return;
     const all_posts = (new Array).concat(posts.newestPosts, posts.archivePosts);
     let results = document.createElement("ul");
