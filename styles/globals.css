@@ -78,6 +78,18 @@ section {
     text-align: center;
 }
 
+#search-bar {
+    padding: 3px;
+}
+
+#search-button{
+    background-color: #0077ff;
+    border: 0px;
+    border-radius: 6px;
+    padding: 5px;
+    margin: 2px;
+}
+
 .artikel-lesen {
   gap: clamp(4px, 2vw, 40px);
   text-align: left;

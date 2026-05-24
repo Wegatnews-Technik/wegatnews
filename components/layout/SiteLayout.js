@@ -130,7 +130,7 @@ export default function SiteLayout({ children, posts }) {
           <>
             <div id="search">
               <input type="text" id="search-bar" />
-              <button id="search-button" onClick={search}>Suche: </button>
+              <button id="search-button" onClick={search}>Suchen</button>
             </div>
             <div id="search-results"></div>
           </>
