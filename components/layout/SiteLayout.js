@@ -50,7 +50,7 @@ export default function SiteLayout({ children, posts }) {
         let link = document.createElement("a");
         link.target = "_blank";
         link.href = "/blog/" + finding.slug;
-        link.innerHTML = finding.title;
+        link.innerText = finding.title;
         list_item.appendChild(link);
         results.appendChild(list_item);
       }
