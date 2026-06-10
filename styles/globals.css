@@ -93,6 +93,7 @@ section {
 .welcome-container {
   text-align: center;
   padding: 40px 20px;
+  padding-bottom: 0px;
 }
 
 .blog-section {
@@ -151,7 +152,7 @@ section {
   color: #999;
 }
 
-.blog-entry a {
+.blog-entry a:not(.tag) {
   display: inline-block;
   padding: 8px 16px;
   background-color: #0077ff;
@@ -161,7 +162,7 @@ section {
   font-size: 0.9rem;
 }
 
-.blog-entry a:hover {
+.blog-entry a:hover:not(.tag) {
   background-color: #005fcc;
 }
 
@@ -234,6 +235,35 @@ section {
   flex-wrap: wrap;
   gap: 20px;
   text-align: center;
+}
+
+.tag {
+    color: #ffffff;
+    background-color: #0077ff;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.tag:hover {
+    padding: 6px;
+}
+
+.Informativ{
+    background-color: #2F80A8;
+}
+
+.Meinung{
+    background-color: #E53935;
+}
+
+.Umfrage{
+    background-color: #2EAD5B;
+}
+
+.Buchrezension{
+    background-color: #7C3AED;
 }
 
 @media (min-width: 769px) {

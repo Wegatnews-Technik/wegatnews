@@ -2,11 +2,13 @@ import { getPostsByTag } from "../../lib/posts";
 import PostGrid from "../../components/blog/PostGrid";
 
 export async function getStaticProps() {
-  const informativ_posts = getPostsByTag("Informativ");
+  const buchrezensions_posts = getPostsByTag("Buchrezension");
+
+  console.log(buchrezensions_posts);
 
   return {
     props: {
-      posts: informativ_posts,
+      posts: buchrezensions_posts,
     },
   };
 }
@@ -31,12 +33,13 @@ function NewestPosts({ posts }) {
   );
 }
 
-export default function InformativIndex({ posts }) {
+export default function BuchrezensionIndex({posts}) {
+
   return (
     <main>
       <div className="welcome-container">
-        <h1>Informativ 📖</h1>
-        <p>Berichte, Argumentationen, Stellungnahmen. Sachliche Diskussionen</p>
+        <h1>Buchrezensionen 📕</h1>
+        <p>Zusammenfassungen und Empfehlungen zu verschieden Büchern</p>
       </div>
 
       <NewestPosts posts={posts} />

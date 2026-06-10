@@ -37,6 +37,10 @@ export default function PostCard({ post }) {
           year: "numeric",
         })}{" "}
         · {post.author}
+        {post.tags.map((tag) =>
+          <Link key={tag} className={"tag " + tag} href={"/" + (tag == "Umfrage" ? "umfragen" : tag.toLowerCase())}>
+            {tag}
+          </Link>)}
       </div>
 
       <div className="blog-entry-actions">
