@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { href: "/mach-mit", label: "Mach mit👋" },
 ];
 
-export default function SiteLayout({ children }) {
+export default function SiteLayout({ children, posts }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,48 @@ export default function SiteLayout({ children }) {
     document.addEventListener("click", closeMenu);
     return () => document.removeEventListener("click", closeMenu);
   }, []);
+
+  useEffect(() => {
+    if (posts.newestPosts || posts.posts) {
+      var input = document.getElementById("search-bar");
+      input.addEventListener("keypress", function (event) {
+        if (event.key == "Enter") {
+          document.getElementById("search-button").click();
+        }
+      });
+      let all_links = document.getElementsByTagName("a");
+      return () => {
+        try{
+          document.getElementById("search-bar").value = "";
+          document.getElementById("search-results").innerHTML = "";
+        }
+        catch {}
+      };
+    }
+  });
+
+  function search() {
+    const search_string = document.getElementById("search-bar").value.trim();
+    if (!search_string) return;
+    const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
+    let results = document.createElement("ul");
+    for (var i = 0; i < all_posts.length; i++) {
+      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
+      if (post_contents.toLowerCase().search(search_string.toLowerCase()) != -1) {
+        const finding = all_posts[i];
+        let list_item = document.createElement("li");
+        let link = document.createElement("a");
+        link.target = "_blank";
+        link.href = "/blog/" + finding.slug;
+        link.innerText = finding.title;
+        list_item.appendChild(link);
+        results.appendChild(list_item);
+      }
+    }
+    let results_div = document.getElementById("search-results");
+    results_div.innerHTML = "<h3>Suchergebnisse: <h3>";
+    results_div.appendChild(results);
+  }
 
   return (
     <>
@@ -84,6 +126,18 @@ export default function SiteLayout({ children }) {
           </ul>
         </div>
       </header>
+
+      {
+        posts.newestPosts || posts.posts ? (
+          <>
+            <div id="search">
+              <input type="text" id="search-bar" />
+              <button id="search-button" onClick={search}>Suchen</button>
+            </div>
+            <div id="search-results"></div>
+          </>
+        ) : (<></>)
+      }
 
       {children}
 
