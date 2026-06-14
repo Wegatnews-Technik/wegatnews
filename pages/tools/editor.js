@@ -311,7 +311,13 @@ export default function EditorPage() {
       <p>
         Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht.
       </p>
-
+      <button
+          type="button"
+          onClick={() => setAdvancedOpen((prev) => !prev)}
+          className="editor-advanced-toggle"
+        >
+          {advancedOpen ? "Advanced schließen" : "Advanced"}
+        </button>
       <MarkdownCkEditor value={contentMarkdown} onChange={setContentMarkdown} />
 
       {!isValidPost ? (
@@ -333,13 +339,7 @@ export default function EditorPage() {
           Markdown herunterladen
         </button>
 
-        <button
-          type="button"
-          onClick={() => setAdvancedOpen((prev) => !prev)}
-          className="editor-advanced-toggle"
-        >
-          {advancedOpen ? "Advanced schließen" : "Advanced"}
-        </button>
+        
       </div>
 
       {advancedOpen ? (
