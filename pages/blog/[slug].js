@@ -63,6 +63,8 @@ export default function Post({ post }) {
         <div className="post-meta-block">
           <p>{post.author}</p>
           <small>Bildquelle: {post.image_source}</small>
+          <br></br>
+          <small>Artikelnummer: {post.articleNumber}</small>
         </div>
 
         <Link href="/" className="button1">
