@@ -4,10 +4,42 @@
         <title>WE G(A)T NEWS - Die Schülerzeitung am GAT</title>
         <link>https://wegatnews.de</link>
         <description>Willkommen auf wegatnews, der digitalen Schülerzeitung am Altenforst.</description>
-        <lastBuildDate>Thu, 21 May 2026 16:04:58 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 17 Jun 2026 15:29:57 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>de</language>
+        <item>
+            <title><![CDATA[Neues Feature: Tags]]></title>
+            <link>https://wegatnews.de/blog/neues-feature-tags/</link>
+            <guid isPermaLink="false">neues-feature-tags</guid>
+            <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ab sofort haben Artikel Tags, um besser zugeordnet werden zu können]]></description>
+            <enclosure url="https://wegatnews.de/article-images/34.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Umfrage zur WM 2026]]></title>
+            <link>https://wegatnews.de/blog/umfrage-zur-wm-2026/</link>
+            <guid isPermaLink="false">umfrage-zur-wm-2026</guid>
+            <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Bald geht die WM in den USA, Mexiko, und Kanada los. Was haltet ihr generell von der WM und werdet ihr sie euch anschauen?]]></description>
+            <enclosure url="https://wegatnews.de/article-images/33.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Kanadische Mikrotonalitätsmasken]]></title>
+            <link>https://wegatnews.de/blog/kanadische-mikrotonalitaetsmasken/</link>
+            <guid isPermaLink="false">kanadische-mikrotonalitaetsmasken</guid>
+            <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Kanadisches Duo nutzt Mikrotonalität und kreative Kostüme]]></description>
+            <enclosure url="https://wegatnews.de/article-images/32.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Buchrezension: Shatter Me]]></title>
+            <link>https://wegatnews.de/blog/buchrezension-shatter-me/</link>
+            <guid isPermaLink="false">buchrezension-shatter-me</guid>
+            <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Eine gelungene Mischung aus Science-Fiction, Fantasy und Romance.]]></description>
+            <enclosure url="https://wegatnews.de/article-images/31.webp" length="0" type="image/webp"/>
+        </item>
         <item>
             <title><![CDATA[Rezension: Die Tribute von Panem]]></title>
             <link>https://wegatnews.de/blog/rezension-die-tribute-von-panem/</link>
