@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "npx playwright test",
     "postbuild": "next-sitemap && npm run generate-rss",
     "generate-rss": "node scripts/generate-rss.js"
   },
