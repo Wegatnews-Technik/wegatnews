@@ -20,7 +20,7 @@ jobs:
     - name: build application
       run: npm run build
     - name: start test server
-      run: npx serve out
+      run: npx serve out &
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
