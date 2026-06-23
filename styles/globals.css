@@ -6,9 +6,9 @@
   --coloraccent: rgba(0, 102, 150);
   --coloraccent-hover: rgb(0, 72, 105);
   --coloraccent2: rgb(1, 173, 173);
-  --h1: bold clamp(24px, 5vw, 40px) / clamp(16px, 12vw, 56px) var(--ff);
-  --h2: bold clamp(20px, 5vw, 28px) / clamp(12px, 8vw, 40px) var(--ff);
-  --p: clamp(17px, 1rem + 0.35vw, 19px) / 1.65 var(--ff);;
+  --h1: 700 clamp(32px, 7vw, 48px) / 1.1 var(--ff);
+  --h2: 700 clamp(24px, 4vw, 32px) / 1.2 var(--ff);
+  --p: clamp(17px, 1rem + 0.3vw, 19px) / 1.65 var(--ff);
   --section-margin: clamp(16px, 2vw, 40px);
   --button-border-radius: clamp(12px, 3vw, 24px);
   --background-color: #f7f7f7;
