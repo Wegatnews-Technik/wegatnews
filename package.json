@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "npx playwright test",
     "postbuild": "next-sitemap && npm run generate-rss",
     "generate-rss": "node scripts/generate-rss.js"
   },
@@ -25,6 +26,7 @@
     "turndown": "^7.2.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.0",
     "@types/node": "25.5.0",
     "@types/react": "19.2.14",
     "babel-plugin-react-compiler": "1.0.0",
