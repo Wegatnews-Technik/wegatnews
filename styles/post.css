@@ -76,6 +76,9 @@
 .post-content {
   width: 100%;
 }
+.post-content p{
+  font: var(--p-big);
+}
 
 .post p {
   margin: 0 0 10px;
