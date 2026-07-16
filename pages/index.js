@@ -27,9 +27,7 @@ function chunkPosts(posts, size) {
 function NewestPosts({ posts }) {
   return (
     <section className="blog-section">
-      {chunkPosts(posts, 4).map((group, index) => (
-        <PostGrid key={index} posts={group} />
-      ))}
+      <PostGrid posts={posts} />
     </section>
   );
 }
