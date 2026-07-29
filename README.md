@@ -23,7 +23,7 @@ Stand: 15. Juli 2026
 | Next.js | 16.2.10, Pages Router |
 | React / React DOM | 19.2.7 |
 | ESLint | 9.39.x |
-| `eslint-config-next` | 16.2.10 |
+| `eslint-config-next` | 16.2.12 |
 | Ausgabe | statischer Export nach `out/` |
 | Inhalte | Markdown mit YAML-Frontmatter |
 | Styling | globale CSS-Dateien |
