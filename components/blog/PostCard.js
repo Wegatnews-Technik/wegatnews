@@ -28,7 +28,7 @@ export default function PostCard({ post }) {
     <div className="blog-entry">
       <img src={post.image} alt={post.title} />
       <h3>{post.title}</h3>
-      <p>{post.preview}...</p>
+      <p className="blog-entry-preview">{post.preview}...</p>
 
       <div className="meta">
         {new Date(post.date).toLocaleDateString("de-DE", {
