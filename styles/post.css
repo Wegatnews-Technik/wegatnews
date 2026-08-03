@@ -14,7 +14,9 @@
   padding-bottom: 20px;
   color: black;
 }
-
+.post-entry-preview {
+  font: var(--p-big);
+}
 .post-image {
   width: 100%;
   max-width: 700px;
@@ -75,6 +77,9 @@
 
 .post-content {
   width: 100%;
+}
+.post-content p{
+  font: var(--p-big);
 }
 
 .post p {

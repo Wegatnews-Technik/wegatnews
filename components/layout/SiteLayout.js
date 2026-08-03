@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/informativ", label: "Informativ📖" },
   { href: "/meinung", label: "Meinung💣" },
   { href: "/umfragen", label: "Umfragen🎤" },
+  { href: "/buchrezension", label: "Buchrezensionen📕" },
   { href: "/mach-mit", label: "Mach mit👋" },
 ];
 
@@ -91,7 +93,7 @@ export default function SiteLayout({ children, posts }) {
       <header>
         <nav>
           <Link href="/" className="logo">
-            <img src="/basic-images/logo.webp" alt="logo" />
+            <Image src="/basic-images/logo.webp" alt="logo" width={700} height={130}/>
           </Link>
 
           <ul>

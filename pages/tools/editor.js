@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ToolsLayout from "../../components/layout/ToolsLayout";
 
 const MarkdownCkEditor = dynamic(
@@ -12,7 +12,7 @@ const MarkdownCkEditor = dynamic(
   },
 );
 
-function normalizeText(value, { singleLine = false } = {}) {
+function normalizeText(value, { singleLine = false, trim = false } = {}) {
   let text = String(value || "")
     .replace(/[\u200B-\u200D\uFEFF\u2060]/g, "")
     .replace(/\u00AD/g, "")
@@ -22,7 +22,7 @@ function normalizeText(value, { singleLine = false } = {}) {
     .replace(/[\u2028\u2029]/g, "\n");
 
   if (singleLine) {
-    return text.replace(/\s+/g, " ").trim();
+    return trim ? text.replace(/\s+/g, " ").trim() : text.replace(/\s+/g, " ");
   }
 
   return text
@@ -36,11 +36,11 @@ function normalizeText(value, { singleLine = false } = {}) {
 function yamlString(value) {
   if (value === undefined || value === null) return '""';
 
-  return `"${normalizeText(value, { singleLine: true }).replace(/"/g, '\\"')}"`;
+  return `"${normalizeText(value, { singleLine: true, trim: true}).replace(/"/g, '\\"')}"`;
 }
 
 function createSlug(value) {
-  return normalizeText(value, { singleLine: true })
+  return normalizeText(value, { singleLine: true, trim: true })
     .toLowerCase()
     .trim()
     .replace(/ä/g, "ae")
@@ -108,7 +108,7 @@ export default function EditorPage() {
   }, [title]);
 
   const addTag = () => {
-    const cleaned = normalizeText(tagInput, { singleLine: true }).toLowerCase();
+    const cleaned = normalizeText(tagInput, { singleLine: true });
 
     if (!cleaned) return;
 
@@ -136,7 +136,7 @@ export default function EditorPage() {
     }
   };
 
-  const buildMarkdown = () => {
+  const buildMarkdown = useCallback(() => {
     const cleanContentMarkdown = sanitizeMarkdown(contentMarkdown);
 
     return [
@@ -154,10 +154,6 @@ export default function EditorPage() {
       "",
       cleanContentMarkdown,
     ].join("\n");
-  };
-
-  useEffect(() => {
-    setMarkdown(buildMarkdown());
   }, [
     title,
     articleNumber,
@@ -169,6 +165,10 @@ export default function EditorPage() {
     tags,
     contentMarkdown,
   ]);
+
+  useEffect(() => {
+    setMarkdown(buildMarkdown());
+  }, [buildMarkdown]);
 
   const downloadMarkdown = () => {
     if (!isValidPost) return;
@@ -215,7 +215,7 @@ export default function EditorPage() {
         value={articleNumber}
         onChange={(event) =>
           setArticleNumber(
-            normalizeText(event.target.value, { singleLine: true }),
+            normalizeText(event.target.value, { singleLine: true, trim: true }),
           )
         }
         className={`editor-input ${
@@ -254,7 +254,7 @@ export default function EditorPage() {
         value={imageSource}
         onChange={(event) =>
           setImageSource(
-            normalizeText(event.target.value, { singleLine: true }),
+            normalizeText(event.target.value, { singleLine: true, trim: true }),
           )
         }
         className="editor-input"
@@ -291,7 +291,7 @@ export default function EditorPage() {
         <input
           value={tagInput}
           onChange={(event) =>
-            setTagInput(normalizeText(event.target.value, { singleLine: true }))
+            setTagInput(normalizeText(event.target.value, { singleLine: true, trim: true }))
           }
           onKeyDown={handleTagKeyDown}
           onBlur={addTag}
@@ -309,9 +309,15 @@ export default function EditorPage() {
       ) : null}
 
       <p>
-        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht. 
+        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht.
       </p>
-
+      <button
+          type="button"
+          onClick={() => setAdvancedOpen((prev) => !prev)}
+          className="editor-advanced-toggle"
+        >
+          {advancedOpen ? "Advanced schließen" : "Advanced"}
+        </button>
       <MarkdownCkEditor value={contentMarkdown} onChange={setContentMarkdown} />
 
       {!isValidPost ? (
@@ -333,13 +339,7 @@ export default function EditorPage() {
           Markdown herunterladen
         </button>
 
-        <button
-          type="button"
-          onClick={() => setAdvancedOpen((prev) => !prev)}
-          className="editor-advanced-toggle"
-        >
-          {advancedOpen ? "Advanced schließen" : "Advanced"}
-        </button>
+
       </div>
 
       {advancedOpen ? (

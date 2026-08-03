@@ -4,10 +4,106 @@
         <title>WE G(A)T NEWS - Die Schülerzeitung am GAT</title>
         <link>https://wegatnews.de</link>
         <description>Willkommen auf wegatnews, der digitalen Schülerzeitung am Altenforst.</description>
-        <lastBuildDate>Thu, 21 May 2026 16:04:58 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 02 Aug 2026 11:03:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>de</language>
+        <item>
+            <title><![CDATA[Stressige Arbeiten?]]></title>
+            <link>https://wegatnews.de/blog/stressige-arbeiten/</link>
+            <guid isPermaLink="false">stressige-arbeiten</guid>
+            <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Jeder kennt das Gefühl, wenn du aufwachst und bemerkst, dass du heute eine wichtige Arbeit schreibst.]]></description>
+            <enclosure url="https://wegatnews.de/article-images/42.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Musik Review: WXTCHCRXFT-” Zhea Eroze”]]></title>
+            <link>https://wegatnews.de/blog/musik-review-wxtchcrxft-zhea-eroze/</link>
+            <guid isPermaLink="false">musik-review-wxtchcrxft-zhea-eroze</guid>
+            <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Amelia Huff (Zhea Erose), die Interpretin des Stückes, beschreibt die EP als]]></description>
+            <enclosure url="https://wegatnews.de/article-images/41.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Zwischen Epstein, Iran und Co.: Trumps glorreiche zweite Amtszeit]]></title>
+            <link>https://wegatnews.de/blog/zwischen-epstein-iran-und-co-trumps-glorreiche-zweite-amtszeit/</link>
+            <guid isPermaLink="false">zwischen-epstein-iran-und-co-trumps-glorreiche-zweite-amtszeit</guid>
+            <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Sobald man den Fernseher aufmacht, sieht man ihn schon: Donald John Trump, hat in seiner 2. Amtszeit mehr als nur]]></description>
+            <enclosure url="https://wegatnews.de/article-images/40.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Langweile? – Welches Buch sollte ich als nächstes lesen?]]></title>
+            <link>https://wegatnews.de/blog/langweile-welches-buch-sollte-ich-als-naechstes-lesen/</link>
+            <guid isPermaLink="false">langweile-welches-buch-sollte-ich-als-naechstes-lesen</guid>
+            <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Kennt nicht jeder das Gefühl, wenn das Buch gerade an einer spannenden Stelle ist und... nichts!]]></description>
+            <enclosure url="https://wegatnews.de/article-images/38.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Auf in's SLZ]]></title>
+            <link>https://wegatnews.de/blog/auf-ins-slz/</link>
+            <guid isPermaLink="false">auf-ins-slz</guid>
+            <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Sommerzeit ist Bücherzeit!]]></description>
+            <enclosure url="https://wegatnews.de/article-images/39.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Die unendlichen Weiten des Meeres]]></title>
+            <link>https://wegatnews.de/blog/die-unendlichen-weiten-des-meeres/</link>
+            <guid isPermaLink="false">die-unendlichen-weiten-des-meeres</guid>
+            <pubDate>Fri, 19 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ist es nicht erstaunlich, dass nur etwa 5–20 % des Meeresbodens erforscht wurden?]]></description>
+            <enclosure url="https://wegatnews.de/article-images/37.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Hinsehen statt Wegsehen – Warum Mobbing kein „Spaß“ ist]]></title>
+            <link>https://wegatnews.de/blog/hinsehen-statt-wegsehen-warum-mobbing-kein-spass-ist/</link>
+            <guid isPermaLink="false">hinsehen-statt-wegsehen-warum-mobbing-kein-spass-ist</guid>
+            <pubDate>Thu, 18 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Beleidigungen im Flur, Gerüchte im Klassenchat, absichtliches Ausgrenzen oder peinliche Videos]]></description>
+            <enclosure url="https://wegatnews.de/article-images/36.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Interview über Mobbing]]></title>
+            <link>https://wegatnews.de/blog/interview-ueber-mobbing/</link>
+            <guid isPermaLink="false">interview-ueber-mobbing</guid>
+            <pubDate>Wed, 17 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ein Interview mit Frau Schaper, stellvertretende für das Beratungsteam, über das Thema Mobbing]]></description>
+            <enclosure url="https://wegatnews.de/article-images/35.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Neues Feature: Tags]]></title>
+            <link>https://wegatnews.de/blog/neues-feature-tags/</link>
+            <guid isPermaLink="false">neues-feature-tags</guid>
+            <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ab sofort haben Artikel Tags, um besser zugeordnet werden zu können]]></description>
+            <enclosure url="https://wegatnews.de/article-images/34.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Umfrage zur WM 2026]]></title>
+            <link>https://wegatnews.de/blog/umfrage-zur-wm-2026/</link>
+            <guid isPermaLink="false">umfrage-zur-wm-2026</guid>
+            <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Bald geht die WM in den USA, Mexiko, und Kanada los. Was haltet ihr generell von der WM und werdet ihr sie euch anschauen?]]></description>
+            <enclosure url="https://wegatnews.de/article-images/33.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Kanadische Mikrotonalitätsmasken]]></title>
+            <link>https://wegatnews.de/blog/kanadische-mikrotonalitaetsmasken/</link>
+            <guid isPermaLink="false">kanadische-mikrotonalitaetsmasken</guid>
+            <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Kanadisches Duo nutzt Mikrotonalität und kreative Kostüme]]></description>
+            <enclosure url="https://wegatnews.de/article-images/32.webp" length="0" type="image/webp"/>
+        </item>
+        <item>
+            <title><![CDATA[Buchrezension: Shatter Me]]></title>
+            <link>https://wegatnews.de/blog/buchrezension-shatter-me/</link>
+            <guid isPermaLink="false">buchrezension-shatter-me</guid>
+            <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Eine gelungene Mischung aus Science-Fiction, Fantasy und Romance.]]></description>
+            <enclosure url="https://wegatnews.de/article-images/31.webp" length="0" type="image/webp"/>
+        </item>
         <item>
             <title><![CDATA[Rezension: Die Tribute von Panem]]></title>
             <link>https://wegatnews.de/blog/rezension-die-tribute-von-panem/</link>

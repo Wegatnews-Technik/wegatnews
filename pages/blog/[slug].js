@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FiShare2 } from "react-icons/fi";
 import { getAllPostSlugs, getPostBySlug } from "../../lib/posts";
 import PostHead from "../../components/seo/PostHead";
+import Image from "next/image";
+import {TARGET_WIDTH, TARGET_HEIGHT} from "../tools/converter"
 
 export default function Post({ post }) {
   async function handleShare() {
@@ -30,7 +32,7 @@ export default function Post({ post }) {
         <div className="post-container">
           <div className="image-or-text">
             {post.image ? (
-              <img src={post.image} alt={post.title} className="post-image" />
+              <Image src={post.image} alt={post.title} className="post-image" width={TARGET_WIDTH} height={TARGET_HEIGHT}/>
             ) : null}
           </div>
 
@@ -47,6 +49,10 @@ export default function Post({ post }) {
               >
                 <FiShare2 aria-hidden="true" />
               </button>
+              {post.tags.map((tag) =>
+                <Link key={tag} className={tag + " tag"} href={"/" + (tag == "Umfrage" ? "umfragen" : tag.toLowerCase())}>
+                  {tag}
+                </Link>)}
             </div>
 
             <div
@@ -59,6 +65,8 @@ export default function Post({ post }) {
         <div className="post-meta-block">
           <p>{post.author}</p>
           <small>Bildquelle: {post.image_source}</small>
+          <br></br>
+          <small>Artikelnummer: {post.articleNumber}</small>
         </div>
 
         <Link href="/" className="button1">

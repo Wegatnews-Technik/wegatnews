@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { FiShare2 } from "react-icons/fi";
+import Image from "next/image";
+import {TARGET_WIDTH, TARGET_HEIGHT} from "../../pages/tools/converter"
 
 export default function PostCard({ post }) {
   async function handleShare(event) {
@@ -26,9 +28,9 @@ export default function PostCard({ post }) {
 
   return (
     <div className="blog-entry">
-      <img src={post.image} alt={post.title} />
+      <Image src={post.image} alt={post.title} width={TARGET_WIDTH} height={TARGET_HEIGHT}/>
       <h3>{post.title}</h3>
-      <p>{post.preview}...</p>
+      <p className="blog-entry-preview">{post.preview}...</p>
 
       <div className="meta">
         {new Date(post.date).toLocaleDateString("de-DE", {
@@ -37,6 +39,10 @@ export default function PostCard({ post }) {
           year: "numeric",
         })}{" "}
         · {post.author}
+        {post.tags.map((tag) =>
+          <Link key={tag} className={"tag " + tag} href={"/" + (tag == "Umfrage" ? "umfragen" : tag.toLowerCase())}>
+            {tag}
+          </Link>)}
       </div>
 
       <div className="blog-entry-actions">
