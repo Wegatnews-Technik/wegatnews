@@ -28,7 +28,6 @@ export default function SiteLayout({ children, posts }) {
           document.getElementById("search-button").click();
         }
       });
-      let all_links = document.getElementsByTagName("a");
       return () => {
         try{
           document.getElementById("search-bar").value = "";
