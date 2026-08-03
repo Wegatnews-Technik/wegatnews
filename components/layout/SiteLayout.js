@@ -45,7 +45,7 @@ export default function SiteLayout({ children, posts }) {
     const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
     let results = document.createElement("ul");
     for (var i = 0; i < all_posts.length; i++) {
-      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author + all_posts[i].contentHtml);
+      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author);
       if (post_contents.toLowerCase().search(search_string.toLowerCase()) != -1) {
         const finding = all_posts[i];
         let list_item = document.createElement("li");
