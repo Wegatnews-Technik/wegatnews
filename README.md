@@ -322,7 +322,6 @@ Interne Pfade sind kleingeschrieben. Beispiele:
 ## Bekannte offene Punkte
 
 - Vor dem nächsten Artikel-Workflow müssen veraltete oder bereits veröffentlichte Dateien aus `neuer-post/` entfernt werden. Im geprüften Projektstand lag dort noch das bereits veröffentlichte Paar `39.md` und `39.webp`.
-- Lint-Warnungen, insbesondere zu normalen `<img>`-Elementen und React-Hooks, sollten schrittweise bereinigt werden. Sie verhindern den Build derzeit nicht, müssen aber bei jedem Update geprüft werden.
 - Branch Protection, verpflichtende Reviews und ein verpflichtender erfolgreicher Build für `main` sollten in den Repository-Einstellungen abgesichert werden.
 
 ## Kurzfassung für neue Technik-Mitglieder

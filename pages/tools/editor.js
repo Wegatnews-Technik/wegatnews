@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ToolsLayout from "../../components/layout/ToolsLayout";
 
 const MarkdownCkEditor = dynamic(
@@ -136,7 +136,7 @@ export default function EditorPage() {
     }
   };
 
-  const buildMarkdown = () => {
+  const buildMarkdown = useCallback(() => {
     const cleanContentMarkdown = sanitizeMarkdown(contentMarkdown);
 
     return [
@@ -154,10 +154,6 @@ export default function EditorPage() {
       "",
       cleanContentMarkdown,
     ].join("\n");
-  };
-
-  useEffect(() => {
-    setMarkdown(buildMarkdown());
   }, [
     title,
     articleNumber,
@@ -169,6 +165,10 @@ export default function EditorPage() {
     tags,
     contentMarkdown,
   ]);
+
+  useEffect(() => {
+    setMarkdown(buildMarkdown());
+  }, [buildMarkdown]);
 
   const downloadMarkdown = () => {
     if (!isValidPost) return;
