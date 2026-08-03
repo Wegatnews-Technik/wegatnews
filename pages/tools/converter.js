@@ -10,7 +10,7 @@ export default function ImageConverterPage() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState("");
-  const [originalSize, setOriginalSize] = useState([TARGET_WIDTH, TARGET_HEIGHT])
+  const [originalSize, setOriginalSize] = useState([TARGET_WIDTH, TARGET_HEIGHT]);
 
   const accept = useMemo(() => "image/*", []);
 
