@@ -322,7 +322,6 @@ Interne Pfade sind kleingeschrieben. Beispiele:
 ## Bekannte offene Punkte
 
 - Vor dem nächsten Artikel-Workflow müssen veraltete oder bereits veröffentlichte Dateien aus `neuer-post/` entfernt werden. Im geprüften Projektstand lag dort noch das bereits veröffentlichte Paar `39.md` und `39.webp`.
-- Die vier Kategorie-Links in `posts/34.md` verwenden Großschreibung und sollten auf die kleingeschriebenen Pfade korrigiert werden.
 - Branch Protection, verpflichtende Reviews und ein verpflichtender erfolgreicher Build für `main` sollten in den Repository-Einstellungen abgesichert werden.
 
 ## Kurzfassung für neue Technik-Mitglieder
