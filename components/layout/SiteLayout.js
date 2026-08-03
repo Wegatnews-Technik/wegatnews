@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/informativ", label: "Informativ📖" },
@@ -50,7 +51,7 @@ export default function SiteLayout({ children }) {
       <header>
         <nav>
           <Link href="/" className="logo">
-            <img src="/basic-images/logo.webp" alt="logo" />
+            <Image src="/basic-images/logo.webp" alt="logo" />
           </Link>
 
           <ul>

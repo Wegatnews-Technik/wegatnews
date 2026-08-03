@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import ToolsLayout from "../../components/layout/ToolsLayout";
+import Image from "next/image";
 
 const TARGET_WIDTH = 1200;
 const TARGET_HEIGHT = 800;
@@ -168,14 +169,14 @@ export default function ImageConverterPage() {
       {previewUrl ? (
         <div className="tools-section">
           <h3>Original</h3>
-          <img src={previewUrl} className="tools-image" alt="Originalbild" />
+          <Image src={previewUrl} className="tools-image" alt="Originalbild" />
         </div>
       ) : null}
 
       {result ? (
         <div className="tools-section">
           <h3>Konvertiert</h3>
-          <img
+          <Image
             src={result.url}
             className="tools-image"
             alt="Konvertiertes Bild"
