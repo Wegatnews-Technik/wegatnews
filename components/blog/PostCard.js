@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FiShare2 } from "react-icons/fi";
 import Image from "next/image";
+import {TARGET_WIDTH, TARGET_HEIGHT} from "../../pages/tools/converter"
 
 export default function PostCard({ post }) {
   async function handleShare(event) {
@@ -27,7 +28,7 @@ export default function PostCard({ post }) {
 
   return (
     <div className="blog-entry">
-      <Image src={post.image} alt={post.title} />
+      <Image src={post.image} alt={post.title} width={TARGET_WIDTH} height={TARGET_HEIGHT}/>
       <h3>{post.title}</h3>
       <p className="blog-entry-preview">{post.preview}...</p>
 

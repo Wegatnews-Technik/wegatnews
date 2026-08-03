@@ -3,6 +3,7 @@ import { FiShare2 } from "react-icons/fi";
 import { getAllPostSlugs, getPostBySlug } from "../../lib/posts";
 import PostHead from "../../components/seo/PostHead";
 import Image from "next/image";
+import {TARGET_WIDTH, TARGET_HEIGHT} from "../tools/converter"
 
 export default function Post({ post }) {
   async function handleShare() {
@@ -31,7 +32,7 @@ export default function Post({ post }) {
         <div className="post-container">
           <div className="image-or-text">
             {post.image ? (
-              <Image src={post.image} alt={post.title} className="post-image" />
+              <Image src={post.image} alt={post.title} className="post-image" width={TARGET_WIDTH} height={TARGET_HEIGHT}/>
             ) : null}
           </div>
 

@@ -51,7 +51,7 @@ export default function SiteLayout({ children }) {
       <header>
         <nav>
           <Link href="/" className="logo">
-            <Image src="/basic-images/logo.webp" alt="logo" />
+            <Image src="/basic-images/logo.webp" alt="logo" width={700} height={130}/>
           </Link>
 
           <ul>
