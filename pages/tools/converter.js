@@ -1,14 +1,16 @@
 import { useMemo, useState } from "react";
 import ToolsLayout from "../../components/layout/ToolsLayout";
+import Image from "next/image";
 
-const TARGET_WIDTH = 1200;
-const TARGET_HEIGHT = 800;
+export const TARGET_WIDTH = 1200;
+export const TARGET_HEIGHT = 800;
 
 export default function ImageConverterPage() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState("");
+  const [originalSize, setOriginalSize] = useState([TARGET_WIDTH, TARGET_HEIGHT]);
 
   const accept = useMemo(() => "image/*", []);
 
@@ -56,6 +58,7 @@ export default function ImageConverterPage() {
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, TARGET_WIDTH, TARGET_HEIGHT);
 
+      setOriginalSize([imageBitmap.width, imageBitmap.height]); // used to correctly display the orignal image
       const scale = Math.max(
         TARGET_WIDTH / imageBitmap.width,
         TARGET_HEIGHT / imageBitmap.height,
@@ -168,17 +171,19 @@ export default function ImageConverterPage() {
       {previewUrl ? (
         <div className="tools-section">
           <h3>Original</h3>
-          <img src={previewUrl} className="tools-image" alt="Originalbild" />
+          <Image src={previewUrl} className="tools-image" alt="Originalbild" width={originalSize[0]} height={originalSize[1]}/>
         </div>
       ) : null}
 
       {result ? (
         <div className="tools-section">
           <h3>Konvertiert</h3>
-          <img
+          <Image
             src={result.url}
             className="tools-image"
             alt="Konvertiertes Bild"
+            width={TARGET_WIDTH}
+            height={TARGET_HEIGHT}
           />
           <p>
             Größe: <strong>{result.sizeKB} KB</strong>

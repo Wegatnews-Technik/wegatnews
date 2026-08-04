@@ -1,7 +1,9 @@
 import Head from "next/head";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const NAV_ITEMS = [
   { href: "/informativ", label: "Informativ 📖" },
@@ -131,7 +133,7 @@ export default function SiteLayout({ children }) {
             className="logo"
             aria-label="WE G(A)T NEWS – Startseite"
           >
-            <img
+            <Image
               src="/basic-images/logo.webp"
               alt="WE G(A)T NEWS"
               width="500"

@@ -23,7 +23,7 @@ Stand: 15. Juli 2026
 | Next.js | 16.2.10, Pages Router |
 | React / React DOM | 19.2.7 |
 | ESLint | 9.39.x |
-| `eslint-config-next` | 16.2.10 |
+| `eslint-config-next` | 16.2.12 |
 | Ausgabe | statischer Export nach `out/` |
 | Inhalte | Markdown mit YAML-Frontmatter |
 | Styling | globale CSS-Dateien |
@@ -322,8 +322,6 @@ Interne Pfade sind kleingeschrieben. Beispiele:
 ## Bekannte offene Punkte
 
 - Vor dem nächsten Artikel-Workflow müssen veraltete oder bereits veröffentlichte Dateien aus `neuer-post/` entfernt werden. Im geprüften Projektstand lag dort noch das bereits veröffentlichte Paar `39.md` und `39.webp`.
-- Die vier Kategorie-Links in `posts/34.md` verwenden Großschreibung und sollten auf die kleingeschriebenen Pfade korrigiert werden.
-- Lint-Warnungen, insbesondere zu normalen `<img>`-Elementen und React-Hooks, sollten schrittweise bereinigt werden. Sie verhindern den Build derzeit nicht, müssen aber bei jedem Update geprüft werden.
 - Branch Protection, verpflichtende Reviews und ein verpflichtender erfolgreicher Build für `main` sollten in den Repository-Einstellungen abgesichert werden.
 
 ## Kurzfassung für neue Technik-Mitglieder
