@@ -15,7 +15,7 @@
 /* Artikelkopf */
 
 .post-hero {
-  display: grid;
+  display: flex;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: clamp(1.5rem, 4vw, 2.5rem);
@@ -396,6 +396,7 @@
   }
 
   .post-hero {
+    display: grid;
     gap: var(--space-6);
     padding-bottom: var(--space-8);
   }
