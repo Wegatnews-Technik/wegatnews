@@ -1,5 +1,5 @@
 .post {
-  --post-reading-max: 68ch;
+  --post-reading-max: 120ch;
 
   width: min(
     calc(100% - 2rem),
@@ -16,17 +16,24 @@
 
 .post-hero {
   display: grid;
-  grid-template-columns:
-    minmax(0, 1.08fr)
-    minmax(20rem, 0.92fr);
-  align-items: center;
-  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
 
-  width: min(100%, 74rem);
+  width: min(100%, var(--post-reading-max));
   margin-inline: auto;
   padding-bottom: clamp(2rem, 5vw, 4.5rem);
 
+  background: transparent;
   border-bottom: 1px solid var(--color-border);
+}
+
+/* Verhindert Sticky-/Fixed-Regeln aus anderen Styles oder Inline-Styles. */
+.post .post-hero,
+.post .post-heading,
+.post .post-media {
+  position: static !important;
+  inset: auto !important;
 }
 
 .post-hero--text-only {
@@ -39,14 +46,22 @@
   min-width: 0;
 }
 
+.post-heading {
+  grid-row: 1;
+}
+
+.post-media {
+  grid-row: 2;
+}
+
 /* Artikelbild */
 
 .post-media {
   overflow: hidden;
 
   border-radius: var(--radius-image);
-  background: var(--color-page);
-  box-shadow: var(--shadow-card);
+  background: transparent;
+  box-shadow: none;
 }
 
 .post-image {
@@ -54,7 +69,7 @@
   width: 100%;
   max-width: none;
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
 
   object-fit: cover;
 }
@@ -62,7 +77,7 @@
 /* Artikeltitel */
 
 .post-title {
-  max-width: 18ch;
+  max-width: none;
   margin: 0;
   overflow: visible;
 
@@ -365,19 +380,7 @@
 
 @media (max-width: 900px) {
   .post-hero {
-    grid-template-columns: minmax(0, 1fr);
-    align-items: start;
-
-    width: min(100%, var(--post-reading-max));
-    gap: var(--space-8);
-  }
-
-  .post-image {
-    aspect-ratio: 16 / 9;
-  }
-
-  .post-title {
-    max-width: none;
+    gap: var(--space-6);
   }
 }
 
@@ -386,7 +389,7 @@
 @media (max-width: 640px) {
   .post {
     width: min(
-      calc(100% - 1.25rem),
+      calc(100% - 3rem),
       var(--content-max)
     );
     padding-block: var(--space-8);
