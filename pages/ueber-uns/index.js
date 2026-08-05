@@ -53,9 +53,9 @@ export default function UeberUnsIndex() {
           <div className="image-or-text">
             <h2>Lehrer</h2>
             <p>
-              Natürlich versuchen wir so unabhängig wie möglich zu arbeiten,
+              Wir versuchen so unabhängig wie möglich zu arbeiten,
               dennoch haben und einige Lehrkäfte so tatkräftig unterstützt, dass
-              sie auch fest zum Team gehören.{" "}
+              sie auch fest zum Team gehören🙏.{" "}
             </p>
             <p>
               Herr Pollheim
