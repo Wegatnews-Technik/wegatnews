@@ -15,12 +15,12 @@ Die Redaktion kann neue Beiträge mit den Browser-Werkzeugen unter `/tools` vorb
 
 ## Aktueller technischer Stand
 
-Stand: 15. Juli 2026
+Stand: 4. August 2026
 
 | Komponente | Version oder Technik |
 | --- | --- |
 | Node.js | 24.x |
-| Next.js | 16.2.10, Pages Router |
+| Next.js | 16.2.12, Pages Router |
 | React / React DOM | 19.2.7 |
 | ESLint | 9.39.x |
 | `eslint-config-next` | 16.2.12 |
@@ -268,8 +268,8 @@ Umami Cloud zählt Seitenaufrufe über das Script in `components/layout/SiteLayo
 Next.js, React, React DOM und `eslint-config-next` sollten gemeinsam aktualisiert werden. Der zuletzt erfolgreich getestete Stand wurde so installiert:
 
 ```bash
-npm install next@16.2.10 react@19.2.7 react-dom@19.2.7
-npm install --save-dev eslint-config-next@16.2.10 eslint@^9.39.5
+npm install next@16.2.12 react@19.2.7 react-dom@19.2.7
+npm install --save-dev eslint-config-next@16.2.12 eslint@^9.39.5
 ```
 
 Danach immer ausführen:

@@ -29,14 +29,16 @@ export default function Post({ post }) {
       <PostHead post={post} />
 
       <article className="post">
-        <div className="post-container">
-          <div className="image-or-text">
-            {post.image ? (
+        <header
+          className={`post-hero${post.image ? "" : " post-hero--text-only"}`}
+        >
+          {post.image ? (
+            <div className="post-media">
               <Image src={post.image} alt={post.title} className="post-image" width={TARGET_WIDTH} height={TARGET_HEIGHT}/>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
-          <div className="image-or-text">
+          <div className="post-heading">
             <h1 className="post-title">{post.title}</h1>
 
             <div className="post-actions">
@@ -49,29 +51,42 @@ export default function Post({ post }) {
               >
                 <FiShare2 aria-hidden="true" />
               </button>
-              {post.tags.map((tag) =>
-                <Link key={tag} className={tag + " tag"} href={"/" + (tag == "Umfrage" ? "umfragen" : tag.toLowerCase())}>
+
+              {post.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  className={`${tag} tag`}
+                  href={`/${
+                    tag === "Umfrage" ? "umfragen" : tag.toLowerCase()
+                  }`}
+                >
                   {tag}
-                </Link>)}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        <div className="post-reading-column">
+          <div
+            className="post-content"
+            dangerouslySetInnerHTML={{
+              __html: post.contentHtml,
+            }}
+          />
+
+          <footer className="post-footer">
+            <div className="post-meta-block">
+              <p>{post.author}</p>
+              <small>Bildquelle: {post.image_source}</small>
+              <small>Artikelnummer: {post.articleNumber}</small>
             </div>
 
-            <div
-              className="post-content"
-              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-            />
-          </div>
+            <Link href="/" className="button1">
+              Zurück zur Homepage
+            </Link>
+          </footer>
         </div>
-
-        <div className="post-meta-block">
-          <p>{post.author}</p>
-          <small>Bildquelle: {post.image_source}</small>
-          <br></br>
-          <small>Artikelnummer: {post.articleNumber}</small>
-        </div>
-
-        <Link href="/" className="button1">
-          Zurück zur Homepage
-        </Link>
       </article>
     </>
   );

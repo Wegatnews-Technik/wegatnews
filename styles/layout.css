@@ -1,138 +1,219 @@
 header {
   position: sticky;
   top: 0;
-  max-height: 200px;
   z-index: 1000;
+  width: 100%;
+  background: var(--color-brand);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 12%);
 }
 
 nav {
-  background-color: var(--coloraccent);
-  padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 4.5rem;
+  padding: 0.625rem clamp(1rem, 3vw, 2rem);
+  background: var(--color-brand);
 }
 
 .logo {
-  color: white;
-  font-size: 24px;
+  display: block;
+  flex: 0 1 auto;
+  width: min(26rem, 38vw);
+  color: var(--color-surface);
   text-decoration: none;
-  font-weight: bold;
-  max-width: 500px;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.logo:hover {
+  color: var(--color-surface);
+}
+
+.logo img {
+  width: auto;
+  max-width: 100%;
+  max-height: 3.25rem;
+  border-radius: 0;
+}
+
+nav > ul {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  right: 20px;
+  gap: clamp(0.125rem, 0.8vw, 0.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-nav ul li {
-  margin-left: 20px;
+nav > ul li {
+  margin: 0;
 }
 
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
+nav > ul li a {
   display: block;
-  font: var(--p);
-  border-radius: clamp(12px, 3vw, 24px);
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-control);
+  color: var(--color-surface);
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast);
 }
 
-nav ul li a:hover {
-  background-color: var(--coloraccent-hover);
+nav > ul li a:hover {
+  color: var(--color-surface);
+  background: var(--color-brand-hover);
 }
 
 .menu-toggle {
   display: none;
+  flex: 0 0 auto;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.45rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  color: var(--color-surface);
+  background: transparent;
   cursor: pointer;
+  transition: background-color var(--transition-fast);
 }
 
-.menu-toggle div {
-  border-radius: 5px;
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  margin: 4px 0;
+.menu-toggle:hover {
+  background: var(--color-brand-hover);
+}
+
+/* Unterstützt sowohl die aktuellen div-Balken als auch eine spätere
+   Umstellung auf span-Elemente in einem echten Button. */
+.menu-toggle > div,
+.menu-toggle > span {
+  display: block;
+  width: 1.55rem;
+  height: 0.1875rem;
+  margin: 0.1875rem 0;
+  border-radius: var(--radius-pill);
+  background: currentColor;
 }
 
 .sidebar {
-  position: fixed;
-  top: 87.77px;
-  right: -250px;
-  width: 250px;
-  height: calc(100% - 53px);
-  background-color: var(--coloraccent);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  transition: right 0.3s ease;
-}
-
-.sidebar.active {
-  right: 0;
-}
-
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  text-align: center;
-}
-
-.sidebar ul li {
-  margin: 15px 0;
-}
-
-.sidebar ul li a {
-  color: var(--color1);
-  text-decoration: none;
-  font: var(--p);
-  padding: 10px;
-  display: flex;
-  padding-left: 20px;
-  border-radius: var(--button-border-radius);
+  display: none;
 }
 
 footer {
-  background-color: var(--coloraccent);
-  padding: clamp(16px, 2vw, 28px);
+  margin-top: auto;
+  padding: var(--space-6) clamp(1rem, 3vw, 2rem);
+  color: var(--color-surface);
+  background: var(--color-brand);
   text-align: center;
-  color: var(--color1);
 }
 
 footer a {
-  margin: 15px;
+  display: inline-block;
+  margin: 0.35rem 0.75rem;
+  color: var(--color-surface);
   font: var(--p);
-  color: var(--color1);
 }
 
-@media (max-width: 768px) {
+footer a:hover {
+  color: var(--color-surface);
+  text-decoration-thickness: 2px;
+}
+
+footer p {
+  margin: var(--space-3) 0 0;
+  color: var(--color-surface);
+}
+
+@media (max-width: 960px) {
+  nav {
+    min-height: 4.5rem;
+  }
+
+  .logo {
+    width: min(20rem, calc(100vw - 5.5rem));
+  }
+
+  nav > ul {
+    display: none;
+  }
+
   .menu-toggle {
     display: flex;
   }
 
   .sidebar {
-    width: 200px;
-    right: -200px;
+    position: fixed;
+    top: 4.5rem;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(18rem, 85vw);
+    height: calc(100dvh - 4.5rem);
+    overflow-y: auto;
+    color: var(--color-surface);
+    background: var(--color-brand);
+    box-shadow: -0.75rem 0 2rem rgb(0 0 0 / 18%);
+    transform: translateX(100%);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform var(--transition-normal),
+      visibility var(--transition-normal);
   }
 
-  nav ul {
-    display: none;
+  .sidebar.active {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .sidebar ul {
+    width: 100%;
+    margin: 0;
+    padding: var(--space-4);
+    list-style: none;
+  }
+
+  .sidebar ul li + li {
+    margin-top: var(--space-2);
+  }
+
+  .sidebar ul li a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-control);
+    color: var(--color-surface);
+    font: var(--p);
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+  }
+
+  .sidebar ul li a:hover {
+    color: var(--color-surface);
+    background: var(--color-brand-hover);
   }
 }
 
 @media (max-width: 480px) {
-  .sidebar {
-    width: 150px;
-    right: -150px;
+  nav {
+    padding-inline: 0.75rem;
+  }
+
+  .logo {
+    width: min(15rem, calc(100vw - 4.75rem));
+  }
+
+  .logo img {
+    max-height: 2.75rem;
+  }
+
+  footer {
+    padding-block: var(--space-5);
   }
 }

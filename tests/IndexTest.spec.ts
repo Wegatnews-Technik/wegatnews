@@ -12,19 +12,19 @@ test("Navbar links", async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
   // Click the get started link.
-  await page.getByRole('navigation').getByRole('link', { name: 'Informativ📖' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Informativ 📖' }).click();
   await expect(page.getByRole('heading', { name: 'Informativ 📖' })).toBeVisible();
 
-  await page.getByRole('navigation').getByRole('link', { name: 'Meinung💣' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Meinung 💣' }).click();
   await expect(page.getByRole('heading', { name: 'Meinung 💣' })).toBeVisible();
 
-  await page.getByRole('navigation').getByRole('link', { name: 'Umfragen🎤' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Umfragen 🎤' }).click();
   await expect(page.getByRole('heading', { name: 'Umfragen 🎤' })).toBeVisible();
 
-  await page.getByRole('navigation').getByRole('link', { name: 'Buchrezensionen📕' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Buchrezensionen 📕' }).click();
   await expect(page.getByRole('heading', { name: 'Buchrezensionen 📕' })).toBeVisible();
 
-  await page.getByRole('navigation').getByRole('link', { name: 'Mach mit👋' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'Mach mit 👋' }).click();
   await expect(page.getByRole('heading', { name: 'Ideen, Artikel, Probleme, Fragen?' })).toBeVisible();
 });
 
