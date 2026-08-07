@@ -254,7 +254,7 @@ export default function EditorPage() {
         value={imageSource}
         onChange={(event) =>
           setImageSource(
-            normalizeText(event.target.value, { singleLine: true, trim: true }),
+            normalizeText(event.target.value, { singleLine: true,}),
           )
         }
         className="editor-input"
