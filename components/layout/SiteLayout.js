@@ -117,6 +117,8 @@ export default function SiteLayout({ children, posts }) {
         link.href = "/blog/" + finding.slug;
         link.innerText = finding.title;
         list_item.appendChild(link);
+        list_item.innerHTML += " - <b>" + new Date(finding.date).toLocaleDateString("de-DE") + "</b>" +
+          " - " + finding.author;
         results.appendChild(list_item);
       }
     }

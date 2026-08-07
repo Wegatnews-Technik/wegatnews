@@ -210,6 +210,10 @@ section > .image-or-text {
     transform: scale(102%)
 }
 
+#search-results li + li {
+  margin-top: var(--space-1);
+}
+
 .artikel-lesen {
   display: flex;
   flex-wrap: wrap;
