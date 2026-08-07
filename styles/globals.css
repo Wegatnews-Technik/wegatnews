@@ -194,11 +194,20 @@ section > .image-or-text {
 }
 
 #search-button{
-    background-color: #0077ff;
+    color: var(--color-surface);
+    background: var(--color-action);
+    font: var(--p);
     border: 0px;
     border-radius: 6px;
     padding: 5px;
     margin: 2px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+#search-button:hover {
+    background: var(--color-brand-hover);
+    transform: scale(102%)
 }
 
 .artikel-lesen {
