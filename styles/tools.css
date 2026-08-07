@@ -1,6 +1,6 @@
 .tools-page {
   min-height: 100vh;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   background: #f5f5f5;
@@ -126,6 +126,20 @@
   margin: 0;
 }
 
+.editor-tag-defaults{
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  flex-wrap: wrap;
+}
+
+.editor-tag-default-button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #fafafa;
+}
 .editor-advanced-toggle {
   padding: 8px 12px;
   border-radius: 6px;

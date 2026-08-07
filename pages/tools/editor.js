@@ -22,7 +22,9 @@ function normalizeText(value, { singleLine = false, trim = false } = {}) {
     .replace(/[\u2028\u2029]/g, "\n");
 
   if (singleLine) {
-    return trim ? text.replace(/\s+/g, " ").trim() : text.replace(/\s+/g, " ");
+    return trim
+      ? text.replace(/\s+/g, " ").trim()
+      : text.replace(/\s+/g, " ");
   }
 
   return text
@@ -36,7 +38,10 @@ function normalizeText(value, { singleLine = false, trim = false } = {}) {
 function yamlString(value) {
   if (value === undefined || value === null) return '""';
 
-  return `"${normalizeText(value, { singleLine: true, trim: true}).replace(/"/g, '\\"')}"`;
+  return `"${normalizeText(value, {
+    singleLine: true,
+    trim: true,
+  }).replace(/"/g, '\\"')}"`;
 }
 
 function createSlug(value) {
@@ -59,6 +64,13 @@ function sanitizeMarkdown(markdown) {
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 }
+
+const DEFAULT_TAGS = [
+  "Informativ",
+  "Meinung",
+  "Umfrage",
+  "Buchrezension",
+];
 
 function markdownToPlainText(markdown) {
   return String(markdown || "")
@@ -107,22 +119,28 @@ export default function EditorPage() {
     setSlug(createSlug(title));
   }, [title]);
 
-  const addTag = () => {
-    const cleaned = normalizeText(tagInput, { singleLine: true });
+  const addTagValue = (value) => {
+    const cleaned = normalizeText(value, {
+      singleLine: true,
+      trim: true,
+    });
 
     if (!cleaned) return;
 
-    if (tags.includes(cleaned)) {
-      setTagInput("");
-      return;
-    }
+    setTags((prev) =>
+      prev.includes(cleaned) ? prev : [...prev, cleaned],
+    );
+  };
 
-    setTags((prev) => [...prev, cleaned]);
+  const addTag = () => {
+    addTagValue(tagInput);
     setTagInput("");
   };
 
   const removeTag = (tagToRemove) => {
-    setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
+    setTags((prev) =>
+      prev.filter((tag) => tag !== tagToRemove),
+    );
   };
 
   const handleTagKeyDown = (event) => {
@@ -131,13 +149,18 @@ export default function EditorPage() {
       addTag();
     }
 
-    if (event.key === "Backspace" && !tagInput && tags.length > 0) {
+    if (
+      event.key === "Backspace" &&
+      !tagInput &&
+      tags.length > 0
+    ) {
       setTags((prev) => prev.slice(0, -1));
     }
   };
 
   const buildMarkdown = useCallback(() => {
-    const cleanContentMarkdown = sanitizeMarkdown(contentMarkdown);
+    const cleanContentMarkdown =
+      sanitizeMarkdown(contentMarkdown);
 
     return [
       "---",
@@ -146,10 +169,14 @@ export default function EditorPage() {
       `slug: ${yamlString(slug)}`,
       `date: ${yamlString(date)}`,
       `author: ${yamlString(author)}`,
-      `image: ${yamlString(`/article-images/${articleNumber.trim()}.webp`)}`,
+      `image: ${yamlString(
+        `/article-images/${articleNumber.trim()}.webp`,
+      )}`,
       `image_source: ${yamlString(imageSource)}`,
       `preview: ${yamlString(preview)}`,
-      `tags: [${tags.map((tag) => yamlString(tag)).join(", ")}]`,
+      `tags: [${tags
+        .map((tag) => yamlString(tag))
+        .join(", ")}]`,
       "---",
       "",
       cleanContentMarkdown,
@@ -174,6 +201,7 @@ export default function EditorPage() {
     if (!isValidPost) return;
 
     const md = buildMarkdown();
+
     const blob = new Blob([md], {
       type: "text/markdown;charset=utf-8",
     });
@@ -198,14 +226,20 @@ export default function EditorPage() {
         placeholder="Titel (max 70 Zeichen)"
         value={title}
         onChange={(event) =>
-          setTitle(normalizeText(event.target.value, { singleLine: true }))
+          setTitle(
+            normalizeText(event.target.value, {
+              singleLine: true,
+            }),
+          )
         }
         className={`editor-input ${
           titleTooLong ? "editor-input-error" : ""
         }`.trim()}
       />
 
-      <div className="editor-char-count">{title.length}/70</div>
+      <div className="editor-char-count">
+        {title.length}/70
+      </div>
 
       <input
         type="text"
@@ -215,7 +249,10 @@ export default function EditorPage() {
         value={articleNumber}
         onChange={(event) =>
           setArticleNumber(
-            normalizeText(event.target.value, { singleLine: true, trim: true }),
+            normalizeText(event.target.value, {
+              singleLine: true,
+              trim: true,
+            }),
           )
         }
         className={`editor-input ${
@@ -234,7 +271,9 @@ export default function EditorPage() {
       <input
         type="date"
         value={date}
-        onChange={(event) => setDate(event.target.value)}
+        onChange={(event) =>
+          setDate(event.target.value)
+        }
         className="editor-input"
       />
 
@@ -243,7 +282,11 @@ export default function EditorPage() {
         placeholder="Author (Vorname, Klassenstufe, zb Clara, 10.Klasse)"
         value={author}
         onChange={(event) =>
-          setAuthor(normalizeText(event.target.value, { singleLine: true }))
+          setAuthor(
+            normalizeText(event.target.value, {
+              singleLine: true,
+            }),
+          )
         }
         className="editor-input"
       />
@@ -254,7 +297,9 @@ export default function EditorPage() {
         value={imageSource}
         onChange={(event) =>
           setImageSource(
-            normalizeText(event.target.value, { singleLine: true,}),
+            normalizeText(event.target.value, {
+              singleLine: true,
+            }),
           )
         }
         className="editor-input"
@@ -265,40 +310,71 @@ export default function EditorPage() {
         placeholder="Textvorschau (ein interessanter Anfang, der Neugier. max 120 Zeichen)"
         value={preview}
         onChange={(event) =>
-          setPreview(normalizeText(event.target.value, { singleLine: true }))
+          setPreview(
+            normalizeText(event.target.value, {
+              singleLine: true,
+            }),
+          )
         }
         className={`editor-textarea ${
           previewTooLong ? "editor-input-error" : ""
         }`.trim()}
       />
 
-      <div className="editor-char-count">{preview.length}/120</div>
-
-      <div className="editor-tags-box">
-        {tags.map((tag) => (
-          <span key={tag} className="editor-tag-chip">
-            {tag}
-            <button
-              type="button"
-              onClick={() => removeTag(tag)}
-              className="editor-tag-remove"
-            >
-              ×
-            </button>
-          </span>
-        ))}
-
-        <input
-          value={tagInput}
-          onChange={(event) =>
-            setTagInput(normalizeText(event.target.value, { singleLine: true, trim: true }))
-          }
-          onKeyDown={handleTagKeyDown}
-          onBlur={addTag}
-          placeholder="Tags (normal leer lassen)"
-          className="editor-tag-input"
-        />
+      <div className="editor-char-count">
+        {preview.length}/120
       </div>
+
+      <div className="editor-tag-defaults">
+        {DEFAULT_TAGS.map((tag) => (
+          <button
+            key={tag}
+            type="button"
+            onClick={() => addTagValue(tag)}
+            disabled={tags.includes(tag)}
+            className="editor-tag-default-button"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+
+      {advancedOpen ? (
+        <div className="editor-tags-box">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="editor-tag-chip"
+            >
+              {tag}
+
+              <button
+                type="button"
+                onClick={() => removeTag(tag)}
+                className="editor-tag-remove"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+
+          <input
+            value={tagInput}
+            onChange={(event) =>
+              setTagInput(
+                normalizeText(event.target.value, {
+                  singleLine: true,
+                  trim: true,
+                }),
+              )
+            }
+            onKeyDown={handleTagKeyDown}
+            onBlur={addTag}
+            placeholder="Eigener Tag"
+            className="editor-tag-input"
+          />
+        </div>
+      ) : null}
 
       {advancedOpen ? (
         <input
@@ -309,21 +385,33 @@ export default function EditorPage() {
       ) : null}
 
       <p>
-        Formartierung des Texts überprüfen, es kann sein dass listen, Fett und Kursiv verloren geht.
+        Formartierung des Texts überprüfen, es kann
+        sein dass listen, Fett und Kursiv verloren
+        geht.
       </p>
+
       <button
-          type="button"
-          onClick={() => setAdvancedOpen((prev) => !prev)}
-          className="editor-advanced-toggle"
-        >
-          {advancedOpen ? "Advanced schließen" : "Advanced"}
-        </button>
-      <MarkdownCkEditor value={contentMarkdown} onChange={setContentMarkdown} />
+        type="button"
+        onClick={() =>
+          setAdvancedOpen((prev) => !prev)
+        }
+        className="editor-advanced-toggle"
+      >
+        {advancedOpen
+          ? "Advanced schließen"
+          : "Advanced"}
+      </button>
+
+      <MarkdownCkEditor
+        value={contentMarkdown}
+        onChange={setContentMarkdown}
+      />
 
       {!isValidPost ? (
         <div className="editor-error-box">
-          Download gesperrt — Titel, Artikelnummer, Vorschau, Autor und Text
-          prüfen. Die Artikelnummer darf nur Zahlen enthalten.
+          Download gesperrt — Titel, Artikelnummer,
+          Vorschau, Autor und Text prüfen. Die
+          Artikelnummer darf nur Zahlen enthalten.
         </div>
       ) : null}
 
@@ -333,19 +421,22 @@ export default function EditorPage() {
           onClick={downloadMarkdown}
           disabled={!isValidPost}
           className={`editor-download-button ${
-            !isValidPost ? "editor-disabled-button" : ""
+            !isValidPost
+              ? "editor-disabled-button"
+              : ""
           }`.trim()}
         >
           Markdown herunterladen
         </button>
-
-
       </div>
 
       {advancedOpen ? (
         <>
           <h2>Markdown Preview</h2>
-          <pre className="editor-preview-box">{markdown}</pre>
+
+          <pre className="editor-preview-box">
+            {markdown}
+          </pre>
         </>
       ) : null}
     </div>
@@ -353,5 +444,9 @@ export default function EditorPage() {
 }
 
 EditorPage.getLayout = function getLayout(page) {
-  return <ToolsLayout title="Blog Post Editor">{page}</ToolsLayout>;
+  return (
+    <ToolsLayout title="Blog Post Editor">
+      {page}
+    </ToolsLayout>
+  );
 };
