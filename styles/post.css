@@ -343,7 +343,7 @@
   display: grid;
   justify-items: start;
   gap: var(--space-6);
-
+  background-color: var(--color-surface);
   margin-top: clamp(3rem, 7vw, 5rem);
   padding-top: var(--space-6);
 

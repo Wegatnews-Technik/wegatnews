@@ -159,7 +159,8 @@ section > .image-or-text {
 
 .button1 {
   display: inline-flex;
-  align-items: center;
+  align-items: left;
+  margin-left: 0px;
   justify-content: center;
   padding: 0.625rem 1rem;
   border: 0;
