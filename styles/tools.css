@@ -140,6 +140,12 @@
   cursor: pointer;
   background: #fafafa;
 }
+
+.enabled-tag{
+    color: white;
+    background-color: var(--coloraccent);
+}
+
 .editor-advanced-toggle {
   padding: 8px 12px;
   border-radius: 6px;

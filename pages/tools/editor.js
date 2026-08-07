@@ -330,9 +330,8 @@ export default function EditorPage() {
           <button
             key={tag}
             type="button"
-            onClick={() => addTagValue(tag)}
-            disabled={tags.includes(tag)}
-            className="editor-tag-default-button"
+            onClick={() => tags.includes(tag) ? removeTag(tag): addTagValue(tag)}
+            className={"editor-tag-default-button" + (tags.includes(tag) ? " enabled-tag" : "")}
           >
             {tag}
           </button>
