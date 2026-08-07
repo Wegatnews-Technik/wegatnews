@@ -185,6 +185,14 @@ export default function SiteLayout({ children, posts }) {
           </Link>
 
           <ul>
+            {
+              posts.newestPosts || posts.posts ? (
+                <div id="search">
+                  <input type="text" id="search-bar" />
+                  <button id="search-button" onClick={search}>Suchen</button>
+                </div>
+              ) : <></>
+              }
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
@@ -218,6 +226,14 @@ export default function SiteLayout({ children, posts }) {
           aria-hidden={!open}
         >
           <ul>
+            {
+              posts.newestPosts || posts.posts ? (
+                <div id="search">
+                  <input type="text" id="search-bar" />
+                  <button id="search-button" onClick={search}>Suchen</button>
+                </div>
+              ) : <></>
+            }
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
@@ -228,13 +244,7 @@ export default function SiteLayout({ children, posts }) {
 
       {
         posts.newestPosts || posts.posts ? (
-          <>
-            <div id="search">
-              <input type="text" id="search-bar" />
-              <button id="search-button" onClick={search}>Suchen</button>
-            </div>
             <div id="search-results"></div>
-          </>
         ) : (<></>)
       }
 
