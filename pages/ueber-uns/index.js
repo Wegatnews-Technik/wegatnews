@@ -7,9 +7,7 @@ export default function UeberUnsIndex() {
           <div className="image-or-text">
             <h2>Gründung</h2>
             <p>
-              Die Schülerzeitung, eine Idee von Ouijdan, wurde gegründet, um den
-              Schülern eine Plattform zu bieten, auf der sie interessante
-              Artikel und Meinungen veröffentlichen können. Unser Ziel ist es...
+              Die Schülerzeitung wurde gegründet, um Schülern eine Plattform zu bieten, auf der sie interessante Artikel und Meinungen veröffentlichen können. Unsere Mission ist es, unterschiedliche Stimmen in unserer Schule hörbar zu machen und Themen anzusprechen, die oft überstehen werden. Die Schülerzeitung ist laut hartnäckig und setzt sich für das Allgemeinwohl ihrer Mitmenschen ein: als Schüler, Bürger und Freie Menschen. Egal wie kontrovers oder „klein“ das Thema sein mag: Eure Anliegen sind unsere und wir nehmen daher jeden Beitrag seriös wahr.
             </p>
           </div>
           <div className="image-or-text">
