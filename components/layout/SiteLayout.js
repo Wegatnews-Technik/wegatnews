@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { href: "/meinung", label: "Meinung 💣" },
   { href: "/umfragen", label: "Umfragen 🎤" },
   { href: "/buchrezension", label: "Buchrezensionen 📕" },
-  { href: "/ueber-uns", label:"Über uns"},
+  { href: "/ueber-uns", label:"Über uns 🏠"},
   { href: "/mach-mit", label: "Mach mit 👋" },
 ];
 
