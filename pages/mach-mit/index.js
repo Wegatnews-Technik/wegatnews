@@ -55,7 +55,7 @@ export default function InformativIndex() {
           <div className="image-or-text">
             <h2>Finde auch Fehler!</h2>
             <p>
-              Hilf uns die Schülerzeitung zu verbessern: Einfach Artikelnummer, Fehlerbeschreibung und Fehlerart an wegatnews@outlook.de (Die Artikelnummer findet man bei jedem Artikel unter Autor.)
+              Hilf uns die Schülerzeitung zu verbessern: Einfach Artikelnummer, Fehlerbeschreibung und Fehlerart an <a href="mailto:wegatnews@outlook.de">wegatnews@outlook.de</a> (Die Artikelnummer findet man bei jedem Artikel unter Autor.)
             </p>
           </div>
         </div>
