@@ -10,8 +10,9 @@ const NAV_ITEMS = [
   { href: "/meinung", label: "Meinung 💣" },
   { href: "/umfragen", label: "Umfragen 🎤" },
   { href: "/buchrezension", label: "Buchrezensionen 📕" },
-  { href: "/tools", label: "Tools 🔧" },
+  { href: "/ueber-uns", label:"Über uns 🏠"},
   { href: "/mach-mit", label: "Mach mit 👋" },
+  { href: "/tools", label: "Tools 🔧" },
 ];
 
 function NavigationItems({ currentPath, onNavigate }) {
