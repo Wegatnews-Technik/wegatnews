@@ -1,0 +1,421 @@
+/* ========================================
+   HEADER / NAV SEARCH
+   ======================================== */
+
+.search {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: clamp(7.5rem, 11vw, 10rem);
+
+  margin: 0;
+}
+
+
+/* Input */
+
+.search-bar {
+  width: 100%;
+  height: 2.25rem;
+
+  padding:
+    0
+    2.4rem
+    0
+    var(--space-3);
+
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: var(--radius-control);
+
+  color: var(--color-text);
+  background: var(--color-surface);
+
+  font: inherit;
+
+  outline: none;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+
+.search-bar::placeholder {
+  color: var(--color-text-muted);
+}
+
+
+/* Focus */
+
+.search-bar:focus {
+  border-color: var(--color-surface);
+
+  box-shadow:
+    0 0 0 3px rgb(255 255 255 / 18%);
+}
+
+
+/* Search icon button */
+
+.search-button {
+  position: absolute;
+
+  top: 50%;
+  right: 0.35rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.75rem;
+  height: 1.75rem;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: calc(
+    var(--radius-control) - 2px
+  );
+
+  color: var(--color-brand);
+  background: transparent;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+
+/* React icon */
+
+.search-button svg {
+  width: 1rem;
+  height: 1rem;
+
+  stroke-width: 2.2;
+}
+
+
+/* Hover */
+
+.search-button:hover {
+  color: var(--color-brand);
+
+  background:
+    rgb(0 102 150 / 10%);
+}
+
+
+/* Click */
+
+.search-button:active {
+  transform:
+    translateY(-50%)
+    scale(0.9);
+}
+
+
+/* Make focus visible for keyboard users */
+
+.search-button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 1px;
+}
+
+
+/* ========================================
+   MOBILE SIDEBAR SEARCH
+   ======================================== */
+
+.sidebar-search-item {
+  width: 100%;
+}
+
+
+.sidebar .search {
+  width: 100%;
+
+  margin-bottom: var(--space-4);
+}
+
+
+.sidebar .search-bar {
+  width: 100%;
+  min-width: 0;
+
+  border-color: var(--color-border);
+}
+
+
+.sidebar .search-bar:focus {
+  border-color: var(--color-brand);
+
+  box-shadow:
+    0 0 0 3px rgb(0 102 150 / 12%);
+}
+
+
+/* ========================================
+   SEARCH PAGE
+   ======================================== */
+
+.search-page {
+  width:
+    min(
+      calc(100% - 2rem),
+      54rem
+    );
+
+  margin-inline: auto;
+
+  padding-block:
+    clamp(
+      2.5rem,
+      6vw,
+      5rem
+    );
+}
+
+
+.search-page-header {
+  margin-bottom: var(--space-6);
+}
+
+
+.search-page-header p {
+  color: var(--color-text-muted);
+}
+
+
+/* Search form on search page */
+
+.search-page-form {
+  position: relative;
+
+  margin-bottom: var(--space-6);
+}
+
+.search-page-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 3.25rem;
+
+  padding:
+    0
+    3rem
+    0
+    var(--space-4);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+
+  color: var(--color-text);
+  background: var(--color-surface);
+
+  font: inherit;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.search-page-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-page-input:focus {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgb(0 102 150 / 12%);
+  outline: none;
+}
+
+.search-page-button {
+  position: absolute;
+
+  top: 50%;
+  right: 0.55rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: var(--radius-control);
+
+  color: var(--color-brand);
+  background: transparent;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.search-page-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.search-page-button:hover {
+  color: var(--color-brand-hover);
+  background: rgb(0 102 150 / 10%);
+}
+
+.search-page-button:active {
+  transform:
+    translateY(-50%)
+    scale(0.92);
+}
+
+.search-page-button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 1px;
+}
+
+/* ========================================
+   SEARCH RESULT SUMMARY
+   ======================================== */
+
+.search-summary {
+  margin-bottom:
+    var(--space-4);
+
+  color:
+    var(--color-text-muted);
+
+  font-weight: 600;
+}
+
+
+/* ========================================
+   SEARCH RESULTS
+   ======================================== */
+
+#search-results ul {
+  display: grid;
+
+  gap:
+    var(--space-3);
+
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+
+#search-results li {
+  padding:
+    var(--space-4)
+    var(--space-5);
+
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius:
+    var(--radius-card);
+
+  background:
+    var(--color-surface);
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+
+#search-results li:hover {
+  border-color:
+    rgb(0 102 150 / 30%);
+
+  box-shadow:
+    var(--shadow-card);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* Result title */
+
+#search-results li a {
+  display: block;
+
+  color:
+    var(--color-text);
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    color var(--transition-fast);
+}
+
+
+#search-results li a:hover {
+  color:
+    var(--color-brand);
+}
+
+
+/* Metadata */
+
+.search-result-meta {
+  display: block;
+
+  margin-top:
+    var(--space-1);
+
+  color:
+    var(--color-text-muted);
+
+  font-size: 0.9rem;
+}
+
+
+/* ========================================
+   EMPTY SEARCH
+   ======================================== */
+
+.search-empty {
+  padding:
+    var(--space-6);
+
+  border:
+    1px dashed
+    var(--color-border);
+
+  border-radius:
+    var(--radius-card);
+
+  color:
+    var(--color-text-muted);
+
+  background:
+    var(--color-page);
+
+  text-align: center;
+}
