@@ -1,4 +1,4 @@
-export default function InformativIndex() {
+export default function MachMitIndex() {
   return (
     <main>
       <section>
