@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <SiteLayout>
+    <SiteLayout posts={pageProps}>
       {getLayout(<Component {...pageProps} />)}
     </SiteLayout>
   );

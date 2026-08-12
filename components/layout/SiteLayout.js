@@ -28,7 +28,7 @@ function NavigationItems({ currentPath, onNavigate }) {
   ));
 }
 
-export default function SiteLayout({ children }) {
+export default function SiteLayout({ children, posts }) {
   const router = useRouter();
   const headerRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -84,6 +84,62 @@ export default function SiteLayout({ children }) {
       );
     };
   }, []);
+
+  useEffect(() => {
+    function listenForEnter(event) {
+      if (event.key == "Enter") {
+        Array.from(document.querySelectorAll("#search-button"))
+          .filter((e) => e.checkVisibility())[0]
+          .click();
+      }
+    }
+
+    if (posts.newestPosts || posts.posts) {
+      Array.from(document.querySelectorAll("#search-bar"))
+        .map((input) => (
+          input.addEventListener("keypress", listenForEnter)
+        ));
+      return () => {
+        try {
+          Array.from(document.querySelectorAll("#search-bar"))
+            .map((input) => (
+              input.removeEventListener("keypress", listenForEnter)
+            ));
+          document.getElementById("search-results").innerHTML = "";
+        }
+        catch {}
+      };
+    }
+  }, [posts]);
+
+  function search() {
+    const search_string = Array.from(document.querySelectorAll("#search-bar"))
+      .filter((e) => e.checkVisibility())[0]
+      .value
+      .trim();
+    if (!search_string) return;
+    const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
+    let results = document.createElement("ul");
+    for (var i = 0; i < all_posts.length; i++) {
+      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author);
+      if (post_contents.toLowerCase().search(search_string.toLowerCase()) != -1) {
+        const finding = all_posts[i];
+        let list_item = document.createElement("li");
+        let link = document.createElement("a");
+        link.target = "_blank";
+        link.href = "/blog/" + finding.slug;
+        link.innerText = finding.title;
+        list_item.appendChild(link);
+        list_item.innerHTML += " - <b>" + new Date(finding.date).toLocaleDateString("de-DE") + "</b>" +
+          " - " + finding.author;
+        results.appendChild(list_item);
+      }
+    }
+    setOpen(false); // Close sidebar if open
+    let results_div = document.getElementById("search-results");
+    results_div.innerHTML = "<h3>Suchergebnisse: <h3>";
+    results_div.appendChild(results);
+  }
 
   return (
     <>
@@ -143,6 +199,14 @@ export default function SiteLayout({ children }) {
           </Link>
 
           <ul>
+            {
+              posts.newestPosts || posts.posts ? (
+                <div id="search">
+                  <input type="text" id="search-bar" />
+                  <button id="search-button" onClick={search}>Suchen</button>
+                </div>
+              ) : <></>
+              }
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
@@ -176,6 +240,14 @@ export default function SiteLayout({ children }) {
           aria-hidden={!open}
         >
           <ul>
+            {
+              posts.newestPosts || posts.posts ? (
+                <div id="search">
+                  <input type="text" id="search-bar" />
+                  <button id="search-button" onClick={search}>Suchen</button>
+                </div>
+              ) : <></>
+            }
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
@@ -183,6 +255,12 @@ export default function SiteLayout({ children }) {
           </ul>
         </aside>
       </header>
+
+      {
+        posts.newestPosts || posts.posts ? (
+            <div id="search-results"></div>
+        ) : (<></>)
+      }
 
       {children}
 
