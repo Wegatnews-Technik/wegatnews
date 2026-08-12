@@ -85,25 +85,37 @@ export default function SiteLayout({ children, posts }) {
   }, []);
 
   useEffect(() => {
+    function listenForEnter(event) {
+      if (event.key == "Enter") {
+        Array.from(document.querySelectorAll("#search-button"))
+          .filter((e) => e.checkVisibility())[0]
+          .click();
+      }
+    }
+
     if (posts.newestPosts || posts.posts) {
-      var input = document.getElementById("search-bar");
-      input.addEventListener("keypress", function (event) {
-        if (event.key == "Enter") {
-          document.getElementById("search-button").click();
-        }
-      });
+      var input = Array.from(document.querySelectorAll("#search-bar"))
+        .map((input) => (
+          input.addEventListener("keypress", listenForEnter)
+        ));
       return () => {
-        try{
-          document.getElementById("search-bar").value = "";
+        try {
+          var input = Array.from(document.querySelectorAll("#search-bar"))
+            .map((input) => (
+              input.removeEventListener("keypress", listenForEnter)
+            ));
           document.getElementById("search-results").innerHTML = "";
         }
         catch {}
       };
     }
-  });
+  }, [posts]);
 
   function search() {
-    const search_string = document.getElementById("search-bar").value.trim();
+    const search_string = Array.from(document.querySelectorAll("#search-bar"))
+      .filter((e) => e.checkVisibility())[0]
+      .value
+      .trim();
     if (!search_string) return;
     const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
     let results = document.createElement("ul");
@@ -122,6 +134,7 @@ export default function SiteLayout({ children, posts }) {
         results.appendChild(list_item);
       }
     }
+    setOpen(false); // Close sidebar if open
     let results_div = document.getElementById("search-results");
     results_div.innerHTML = "<h3>Suchergebnisse: <h3>";
     results_div.appendChild(results);
