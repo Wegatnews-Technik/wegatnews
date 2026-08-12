@@ -28,7 +28,7 @@ function renderSearchResults(posts, searchString) {
       posts[i].title + posts[i].preview + posts[i].author,
     );
 
-    if (postContents.toLowerCase().search(searchString.toLowerCase()) !== -1) {
+    if (postContents.toLowerCase().includes(searchString.toLowerCase())) {
       const finding = posts[i];
 
       const listItem = document.createElement("li");
