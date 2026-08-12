@@ -94,13 +94,13 @@ export default function SiteLayout({ children, posts }) {
     }
 
     if (posts.newestPosts || posts.posts) {
-      var input = Array.from(document.querySelectorAll("#search-bar"))
+      Array.from(document.querySelectorAll("#search-bar"))
         .map((input) => (
           input.addEventListener("keypress", listenForEnter)
         ));
       return () => {
         try {
-          var input = Array.from(document.querySelectorAll("#search-bar"))
+          Array.from(document.querySelectorAll("#search-bar"))
             .map((input) => (
               input.removeEventListener("keypress", listenForEnter)
             ));
