@@ -185,35 +185,6 @@ section > .image-or-text {
   width: 100%;
 }
 
-#search {
-    margin: 10px;
-    text-align: center;
-}
-
-#search-bar {
-    padding: 3px;
-}
-
-#search-button{
-    color: var(--color-surface);
-    background: var(--color-action);
-    font: var(--p);
-    border: 0px;
-    border-radius: 6px;
-    padding: 5px;
-    margin: 2px;
-    cursor: pointer;
-    transition: var(--transition-fast);
-}
-
-#search-button:hover {
-    background: var(--color-brand-hover);
-    transform: scale(102%)
-}
-
-#search-results li + li {
-  margin-top: var(--space-1);
-}
 
 .artikel-lesen {
   display: flex;

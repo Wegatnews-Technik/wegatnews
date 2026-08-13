@@ -1,9 +1,12 @@
 import Head from "next/head";
-
 import Link from "next/link";
+import Image from "next/image";
+
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+
+import { FiSearch } from "react-icons/fi";
+
 
 const NAV_ITEMS = [
   { href: "/informativ", label: "Informativ 📖" },
@@ -13,6 +16,7 @@ const NAV_ITEMS = [
   { href: "/ueber-uns", label:"Über uns 🏠"},
   { href: "/mach-mit", label: "Mach mit 👋" },
 ];
+
 
 function NavigationItems({ currentPath, onNavigate }) {
   return NAV_ITEMS.map((item) => (
@@ -28,10 +32,51 @@ function NavigationItems({ currentPath, onNavigate }) {
   ));
 }
 
-export default function SiteLayout({ children, posts }) {
+
+function SearchForm({ onSearch }) {
+  return (
+    <form
+      className="search"
+      onSubmit={onSearch}
+      role="search"
+    >
+      <input
+        className="search-bar"
+        name="search"
+        type="search"
+        placeholder="Suchen …"
+        aria-label="Artikel suchen"
+        autoComplete="off"
+      />
+
+      <button
+        className="search-button"
+        type="submit"
+        aria-label="Suche starten"
+        title="Suchen"
+      >
+        <FiSearch aria-hidden="true" />
+      </button>
+    </form>
+  );
+}
+
+
+export default function SiteLayout({
+  children,
+  posts = {},
+}) {
   const router = useRouter();
+
   const headerRef = useRef(null);
+
   const [open, setOpen] = useState(false);
+
+
+  const hasSearch = Boolean(
+    posts?.newestPosts || posts?.posts
+  );
+
 
   useEffect(() => {
     function handlePointerDown(event) {
@@ -43,28 +88,44 @@ export default function SiteLayout({ children, posts }) {
       }
     }
 
+
     function handleKeyDown(event) {
       if (event.key === "Escape") {
         setOpen(false);
       }
     }
 
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown
+    );
+
+    document.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
 
     return () => {
       document.removeEventListener(
         "pointerdown",
-        handlePointerDown,
+        handlePointerDown
       );
-      document.removeEventListener("keydown", handleKeyDown);
+
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
     };
   }, []);
 
+
   useEffect(() => {
     const desktopMedia = window.matchMedia(
-      "(min-width: 961px)",
+      "(min-width: 961px)"
     );
+
 
     function handleDesktopChange(event) {
       if (event.matches) {
@@ -72,74 +133,49 @@ export default function SiteLayout({ children, posts }) {
       }
     }
 
+
     desktopMedia.addEventListener(
       "change",
-      handleDesktopChange,
+      handleDesktopChange
     );
+
 
     return () => {
       desktopMedia.removeEventListener(
         "change",
-        handleDesktopChange,
+        handleDesktopChange
       );
     };
   }, []);
 
-  useEffect(() => {
-    function listenForEnter(event) {
-      if (event.key == "Enter") {
-        Array.from(document.querySelectorAll("#search-button"))
-          .filter((e) => e.checkVisibility())[0]
-          .click();
-      }
+
+  function search(event) {
+    event.preventDefault();
+
+
+    const form = event.currentTarget;
+
+    const searchBar = form.elements.search;
+
+    const searchString =
+      searchBar.value.trim();
+
+
+    if (!searchString) {
+      searchBar.focus();
+
+      return;
     }
 
-    if (posts.newestPosts || posts.posts) {
-      Array.from(document.querySelectorAll("#search-bar"))
-        .map((input) => (
-          input.addEventListener("keypress", listenForEnter)
-        ));
-      return () => {
-        try {
-          Array.from(document.querySelectorAll("#search-bar"))
-            .map((input) => (
-              input.removeEventListener("keypress", listenForEnter)
-            ));
-          document.getElementById("search-results").innerHTML = "";
-        }
-        catch {}
-      };
-    }
-  }, [posts]);
 
-  function search() {
-    const search_string = Array.from(document.querySelectorAll("#search-bar"))
-      .filter((e) => e.checkVisibility())[0]
-      .value
-      .trim();
-    if (!search_string) return;
-    const all_posts = posts.posts ? posts.posts : (new Array).concat(posts.newestPosts, posts.archivePosts);
-    let results = document.createElement("ul");
-    for (var i = 0; i < all_posts.length; i++) {
-      var post_contents = "".concat(all_posts[i].title + all_posts[i].preview + all_posts[i].author);
-      if (post_contents.toLowerCase().search(search_string.toLowerCase()) != -1) {
-        const finding = all_posts[i];
-        let list_item = document.createElement("li");
-        let link = document.createElement("a");
-        link.target = "_blank";
-        link.href = "/blog/" + finding.slug;
-        link.innerText = finding.title;
-        list_item.appendChild(link);
-        list_item.innerHTML += " - <b>" + new Date(finding.date).toLocaleDateString("de-DE") + "</b>" +
-          " - " + finding.author;
-        results.appendChild(list_item);
-      }
-    }
-    setOpen(false); // Close sidebar if open
-    let results_div = document.getElementById("search-results");
-    results_div.innerHTML = "<h3>Suchergebnisse: <h3>";
-    results_div.appendChild(results);
+    setOpen(false);
+
+
+    router.push(
+      `/suche?q=${encodeURIComponent(searchString)}`
+    );
   }
+
 
   return (
     <>
@@ -158,23 +194,35 @@ export default function SiteLayout({ children, posts }) {
           content="Schülerzeitung, Gymnasium zum Altenforst, Troisdorf, News, Meinungen, Umfragen"
         />
 
-        <meta name="author" content="Vincent Cui" />
+        <meta
+          name="author"
+          content="Vincent Cui"
+        />
 
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1"
         />
 
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+        />
 
-        <meta property="og:title" content="WE G(A)T NEWS" />
+        <meta
+          property="og:title"
+          content="WE G(A)T NEWS"
+        />
 
         <meta
           property="og:description"
           content="Unabhängiger Blog für Information, Meinung und Umfragen"
         />
 
-        <meta property="og:type" content="website" />
+        <meta
+          property="og:type"
+          content="website"
+        />
 
         <script
           defer
@@ -183,8 +231,10 @@ export default function SiteLayout({ children, posts }) {
         />
       </Head>
 
+
       <header ref={headerRef}>
         <nav aria-label="Hauptnavigation">
+
           <Link
             href="/"
             className="logo"
@@ -193,25 +243,28 @@ export default function SiteLayout({ children, posts }) {
             <Image
               src="/basic-images/logo.webp"
               alt="WE G(A)T NEWS"
-              width="500"
-              height="98"
+              width={500}
+              height={98}
             />
           </Link>
 
+
           <ul>
-            {
-              posts.newestPosts || posts.posts ? (
-                <div id="search">
-                  <input type="text" id="search-bar" />
-                  <button id="search-button" onClick={search}>Suchen</button>
-                </div>
-              ) : <></>
-              }
+            {hasSearch && (
+              <li className="search-nav-item">
+                <SearchForm
+                  onSearch={search}
+                />
+              </li>
+            )}
+
+
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
             />
           </ul>
+
 
           <button
             type="button"
@@ -231,7 +284,9 @@ export default function SiteLayout({ children, posts }) {
             <span aria-hidden="true" />
             <span aria-hidden="true" />
           </button>
+
         </nav>
+
 
         <aside
           id="mobile-navigation"
@@ -240,36 +295,45 @@ export default function SiteLayout({ children, posts }) {
           aria-hidden={!open}
         >
           <ul>
-            {
-              posts.newestPosts || posts.posts ? (
-                <div id="search">
-                  <input type="text" id="search-bar" />
-                  <button id="search-button" onClick={search}>Suchen</button>
-                </div>
-              ) : <></>
-            }
+
+            {hasSearch && (
+              <li className="sidebar-search-item">
+                <SearchForm
+                  onSearch={search}
+                />
+              </li>
+            )}
+
+
             <NavigationItems
               currentPath={router.pathname}
               onNavigate={() => setOpen(false)}
             />
+
           </ul>
         </aside>
       </header>
 
-      {
-        posts.newestPosts || posts.posts ? (
-            <div id="search-results"></div>
-        ) : (<></>)
-      }
 
       {children}
 
-      <footer>
-        <Link href="/impressum">Datenschutz</Link>
-        <Link href="/impressum">Impressum</Link>
-        <Link href="/impressum">Cookies</Link>
 
-        <p>© 2026 WE G(A)T NEWS</p>
+      <footer>
+        <Link href="/impressum">
+          Datenschutz
+        </Link>
+
+        <Link href="/impressum">
+          Impressum
+        </Link>
+
+        <Link href="/impressum">
+          Cookies
+        </Link>
+
+        <p>
+          © 2026 WE G(A)T NEWS
+        </p>
       </footer>
     </>
   );
