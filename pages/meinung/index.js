@@ -31,7 +31,7 @@ function NewestPosts({ posts }) {
   );
 }
 
-export default function InformativIndex({ posts }) {
+export default function MeinungIndex({ posts }) {
   return (
     <main>
       <div className="welcome-container">
@@ -39,7 +39,7 @@ export default function InformativIndex({ posts }) {
         <p>Eigene Ansichten, provokative Diskussionen, Satire</p>
       </div>
         <NewestPosts posts={posts} />
-      
+
     </main>
   );
 }

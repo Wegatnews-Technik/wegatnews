@@ -67,6 +67,10 @@ nav > ul li a:hover {
   background: var(--color-brand-hover);
 }
 
+nav > ul li a[aria-current="page"] {
+    background: var(--color-action);
+}
+
 .menu-toggle {
   display: none;
   flex: 0 0 auto;

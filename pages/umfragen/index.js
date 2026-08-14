@@ -31,7 +31,7 @@ function NewestPosts({ posts }) {
   );
 }
 
-export default function InformativIndex({ posts }) {
+export default function UmfragenIndex({ posts }) {
   return (
     <main>
       <div className="welcome-container">
