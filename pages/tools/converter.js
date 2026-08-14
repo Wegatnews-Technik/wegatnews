@@ -6,7 +6,6 @@ import {
   FiCheckCircle,
   FiDownload,
   FiExternalLink,
-  FiHash,
   FiImage,
   FiInfo,
   FiUploadCloud,

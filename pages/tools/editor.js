@@ -6,7 +6,6 @@ import {
   FiCalendar,
   FiCode,
   FiDownload,
-  FiHash,
   FiLink,
   FiSettings,
   FiTag,
