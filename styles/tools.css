@@ -1,33 +1,81 @@
-.tools-page {
-  min-height: 100vh;
-  padding: 20px;
+.tools-overview {
+  padding-block: var(--space-10);
+}
+
+.tools-overview-header {
+  max-width: 46rem;
+  margin-bottom: var(--space-8);
+}
+
+.tools-overview-intro {
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+  font: var(--p-big);
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: var(--space-5);
+}
+
+.tool-overview-card {
   display: flex;
-  justify-content: center;
-  background: #f5f5f5;
-}
+  flex-direction: column;
+  min-height: 16rem;
+  padding: var(--space-6);
 
-.tools-shell {
-  width: 100%;
-  max-width: 900px;
-}
+  color: var(--color-text);
+  background: var(--color-page);
 
-.tools-nav {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 
-.tools-nav-link {
   text-decoration: none;
-  color: #ffffff;
-  background-color: var(--coloraccent);
-  border-radius: 8px;
-  padding: 8px 12px;
+
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
-.tools-title {
-  margin-top: 0;
+.tool-overview-card:hover {
+  color: var(--color-text);
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-0.25rem);
+}
+
+.tool-overview-card h2 {
+  margin-bottom: var(--space-2);
+}
+
+.tool-overview-card p {
+  color: var(--color-text-muted);
+}
+
+.tool-overview-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--space-5);
+  color: var(--color-brand);
+}
+
+.tool-overview-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  margin-top: auto;
+
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.tool-overview-action svg {
+  flex: 0 0 auto;
 }
 
 .tools-card {
@@ -296,4 +344,8 @@
   align-items: center;
   min-height: 220px;
   color: var(--color3);
+}
+
+.tools-detail-page {
+  padding-block: var(--space-10);
 }

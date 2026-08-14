@@ -8,11 +8,9 @@ import "ckeditor5/ckeditor5.css";
 import SiteLayout from "../components/layout/SiteLayout";
 
 export default function App({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page);
-
   return (
     <SiteLayout posts={pageProps}>
-      {getLayout(<Component {...pageProps} />)}
+      <Component {...pageProps} />
     </SiteLayout>
   );
 }
