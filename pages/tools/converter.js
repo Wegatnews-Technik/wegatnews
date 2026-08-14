@@ -1,6 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import {
+  FiAlertCircle,
+  FiCheckCircle,
+  FiDownload,
+  FiExternalLink,
+  FiHash,
+  FiImage,
+  FiInfo,
+  FiUploadCloud,
+} from "react-icons/fi";
 
 export const TARGET_WIDTH = 1200;
 export const TARGET_HEIGHT = 800;
@@ -8,17 +18,23 @@ export const TARGET_HEIGHT = 800;
 export default function ImageConverterPage() {
   const [previewUrl, setPreviewUrl] =
     useState(null);
+
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+
   const [fileName, setFileName] =
     useState("");
+
   const [originalSize, setOriginalSize] =
     useState([
       TARGET_WIDTH,
       TARGET_HEIGHT,
     ]);
 
-  const accept = useMemo(() => "image/*", []);
+  const accept = useMemo(
+    () => "image/*",
+    [],
+  );
 
   const fileNameValid = /^\d+$/.test(
     fileName.trim(),
@@ -54,14 +70,18 @@ export default function ImageConverterPage() {
   const handleFileChange = async (event) => {
     const file = event.target.files?.[0];
 
-    if (!file) return;
+    if (!file) {
+      return;
+    }
 
     setError(null);
 
     cleanupOldResult();
     cleanupOldPreview();
 
-    const preview = URL.createObjectURL(file);
+    const preview =
+      URL.createObjectURL(file);
+
     setPreviewUrl(preview);
 
     try {
@@ -74,9 +94,17 @@ export default function ImageConverterPage() {
       canvas.width = TARGET_WIDTH;
       canvas.height = TARGET_HEIGHT;
 
-      const ctx = canvas.getContext("2d");
+      const ctx =
+        canvas.getContext("2d");
+
+      if (!ctx) {
+        throw new Error(
+          "Canvas konnte nicht erstellt werden.",
+        );
+      }
 
       ctx.fillStyle = "#ffffff";
+
       ctx.fillRect(
         0,
         0,
@@ -135,7 +163,9 @@ export default function ImageConverterPage() {
 
       setResult({
         url,
-        sizeKB: Math.round(blob.size / 1024),
+        sizeKB: Math.round(
+          blob.size / 1024,
+        ),
       });
 
       if (imageBitmap.close) {
@@ -143,6 +173,7 @@ export default function ImageConverterPage() {
       }
     } catch {
       setResult(null);
+
       setError(
         "Fehler beim Konvertieren.",
       );
@@ -161,59 +192,90 @@ export default function ImageConverterPage() {
         <title>
           Bildconverter | WE G(A)T NEWS
         </title>
+
         <meta
           name="description"
           content="Bilder für WE G(A)T NEWS ins richtige Format bringen"
         />
       </Head>
 
-      <section className="tools-detail-page">
-        <h1>Bildconverter</h1>
+      <section className="converter-page">
+        <header className="converter-page-header">
+          <div
+            className="converter-page-icon"
+            aria-hidden="true"
+          >
+            <FiImage />
+          </div>
 
-        <div className="tools-card tools-card--converter">
-          <p className="tools-copy">
-            Bild auswählen, Artikelnummer eingeben
-            und herunterladen.{" "}
-            <strong>
+          <div>
+            <h1>Bildconverter</h1>
+
+            <p>
+              Bilder automatisch auf{" "}
+              {TARGET_WIDTH} × {TARGET_HEIGHT} px
+              zuschneiden und als WebP speichern.
+            </p>
+          </div>
+        </header>
+
+        <div className="converter-card">
+          <div className="converter-notice">
+            <FiInfo aria-hidden="true" />
+
+            <p>
+              Bild auswählen, Artikelnummer
+              eingeben und herunterladen. Die
               Bildquelle für den Editor nicht
               vergessen.
-            </strong>{" "}
-            Am besten den Tab offen lassen.
-          </p>
+            </p>
+          </div>
 
-          <p>
-            Websites zur Bildsuche:{" "}
+          <div className="converter-source-links">
+            <span>
+              Websites zur Bildsuche:
+            </span>
+
             <a
               href="https://unsplash.com/de"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Unsplash
+              Unsplash 
+              <FiExternalLink
+                aria-hidden="true"
+              />
             </a>
-            {", "}
+
             <a
               href="https://www.pexels.com/de-de/"
               target="_blank"
               rel="noopener noreferrer"
             >
               Pexels
+              <FiExternalLink
+                aria-hidden="true"
+              />
             </a>
-            {", "}
+
             <a
               href="https://pixabay.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
               Pixabay
+              <FiExternalLink
+                aria-hidden="true"
+              />
             </a>
-          </p>
+          </div>
 
-          <div className="tools-field">
+          <div className="converter-field">
             <label
               htmlFor="converter-file-name"
-              className="tools-label"
+              className="converter-label"
             >
-              Dateiname
+              Artikelnummer
             </label>
 
             <input
@@ -227,11 +289,11 @@ export default function ImageConverterPage() {
                   event.target.value,
                 )
               }
-              placeholder="Artikelnummer"
-              className={`tools-input ${
+              placeholder="z. B. 44"
+              className={`converter-input ${
                 fileName.trim() &&
                 !fileNameValid
-                  ? "tools-input-error"
+                  ? "converter-input-error"
                   : ""
               }`.trim()}
             />
@@ -239,22 +301,32 @@ export default function ImageConverterPage() {
 
           {fileName.trim() &&
           !fileNameValid ? (
-            <p className="tools-error">
-              Die Artikelnummer darf nur Zahlen
-              enthalten.
-            </p>
+            <div className="converter-message converter-message-error">
+              <FiAlertCircle
+                aria-hidden="true"
+              />
+
+              <span>
+                Die Artikelnummer darf nur Zahlen
+                enthalten.
+              </span>
+            </div>
           ) : null}
 
-          <div className="tools-actions">
-            <label className="tools-upload-button">
+          <div className="converter-actions">
+            <label className="converter-upload-button">
+              <FiUploadCloud
+                aria-hidden="true"
+              />
+
+              <span>Bild auswählen</span>
+
               <input
                 type="file"
                 accept={accept}
                 onChange={handleFileChange}
-                className="tools-hidden-input"
+                className="converter-hidden-input"
               />
-
-              Bild auswählen
             </label>
 
             <a
@@ -273,56 +345,93 @@ export default function ImageConverterPage() {
                   event.preventDefault();
                 }
               }}
-              className={`tools-download-button ${
+              aria-disabled={!canDownload}
+              className={`converter-download-button ${
                 canDownload
                   ? ""
                   : "is-disabled"
               }`.trim()}
             >
+              <FiDownload
+                aria-hidden="true"
+              />
+
               Herunterladen
             </a>
           </div>
 
           {error ? (
-            <p className="tools-error">
-              {error}
-            </p>
-          ) : null}
-
-          {previewUrl ? (
-            <div className="tools-section">
-              <h2>Original</h2>
-
-              <Image
-                src={previewUrl}
-                className="tools-image"
-                alt="Originalbild"
-                width={originalSize[0]}
-                height={originalSize[1]}
+            <div className="converter-message converter-message-error">
+              <FiAlertCircle
+                aria-hidden="true"
               />
+
+              <span>{error}</span>
             </div>
           ) : null}
 
-          {result ? (
-            <div className="tools-section">
-              <h2>Konvertiert</h2>
+          {previewUrl || result ? (
+            <div className="converter-preview-grid">
+              {previewUrl ? (
+                <article className="converter-preview-card">
+                  <div className="converter-preview-heading">
+                    <FiImage
+                      aria-hidden="true"
+                    />
 
-              <Image
-                src={result.url}
-                className="tools-image"
-                alt="Konvertiertes Bild"
-                width={TARGET_WIDTH}
-                height={TARGET_HEIGHT}
-              />
+                    <h2>Original</h2>
+                  </div>
+
+                  <Image
+                    src={previewUrl}
+                    className="converter-image"
+                    alt="Originalbild"
+                    width={originalSize[0]}
+                    height={originalSize[1]}
+                  />
+
+                  <p className="converter-image-meta">
+                    {originalSize[0]} ×{" "}
+                    {originalSize[1]} px
+                  </p>
+                </article>
+              ) : null}
+
+              {result ? (
+                <article className="converter-preview-card">
+                  <div className="converter-preview-heading converter-preview-success">
+                    <FiCheckCircle
+                      aria-hidden="true"
+                    />
+
+                    <h2>Konvertiert</h2>
+                  </div>
+
+                  <Image
+                    src={result.url}
+                    className="converter-image"
+                    alt="Konvertiertes Bild"
+                    width={TARGET_WIDTH}
+                    height={TARGET_HEIGHT}
+                  />
+
+                  <p className="converter-image-meta">
+                    {TARGET_WIDTH} ×{" "}
+                    {TARGET_HEIGHT} px ·{" "}
+                    {result.sizeKB} KB
+                  </p>
+                </article>
+              ) : null}
+            </div>
+          ) : (
+            <div className="converter-empty-state">
+              <FiImage aria-hidden="true" />
 
               <p>
-                Größe:{" "}
-                <strong>
-                  {result.sizeKB} KB
-                </strong>
+                Noch kein Bild ausgewählt.
               </p>
             </div>
-          ) : null}
+          )}
         </div>
       </section>
     </>

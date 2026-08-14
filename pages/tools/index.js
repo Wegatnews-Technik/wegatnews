@@ -21,23 +21,35 @@ export default function ToolsIndexPage() {
 
       <section className="tools-overview">
         <div className="tools-overview-header">
-          <h1>Redaktions-Tools</h1>
+          <h1>Tools für Redaktion und Leserschaft</h1>
 
           <p className="tools-overview-intro">
-            Kleine Werkzeuge für Artikel, Bilder und die Verwaltung von
-            WE G(A)T NEWS.
+            Kleine Werkzeuge für Artikel, Bilder und die Verwaltung von WE G(A)T
+            NEWS.
           </p>
         </div>
 
         <div className="tools-grid">
-          <Link
-            href="/tools/editor"
+          <a
+            href="https://cloud.umami.is/share/j2rKzIhE8t490C1z"
+            target="_blank"
+            rel="noopener noreferrer"
             className="tool-overview-card"
           >
-            <FiEdit3
-              className="tool-overview-icon"
-              aria-hidden="true"
-            />
+            <FiTrendingUp className="tool-overview-icon" aria-hidden="true" />
+
+            <h2>Statistiken</h2>
+
+            <p>Besucherzahlen und die Nutzung der Website in Umami ansehen.</p>
+
+            <span className="tool-overview-action">
+              Statistiken öffnen
+              <FiExternalLink aria-hidden="true" />
+            </span>
+          </a>
+
+          <Link href="/tools/editor" className="tool-overview-card">
+            <FiEdit3 className="tool-overview-icon" aria-hidden="true" />
 
             <h2>Texteditor</h2>
 
@@ -52,20 +64,14 @@ export default function ToolsIndexPage() {
             </span>
           </Link>
 
-          <Link
-            href="/tools/converter"
-            className="tool-overview-card"
-          >
-            <FiImage
-              className="tool-overview-icon"
-              aria-hidden="true"
-            />
+          <Link href="/tools/converter" className="tool-overview-card">
+            <FiImage className="tool-overview-icon" aria-hidden="true" />
 
             <h2>Bildconverter</h2>
 
             <p>
-              Bilder auf das richtige Format bringen und als WebP für
-              Artikel speichern.
+              Bilder auf das richtige Format bringen und als WebP für Artikel
+              speichern.
             </p>
 
             <span className="tool-overview-action">
@@ -73,30 +79,6 @@ export default function ToolsIndexPage() {
               <FiArrowRight aria-hidden="true" />
             </span>
           </Link>
-
-          <a
-            href="https://cloud.umami.is/share/j2rKzIhE8t490C1z"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tool-overview-card"
-          >
-            <FiTrendingUp
-              className="tool-overview-icon"
-              aria-hidden="true"
-            />
-
-            <h2>Statistiken</h2>
-
-            <p>
-              Besucherzahlen und die Nutzung der Website in Umami
-              ansehen.
-            </p>
-
-            <span className="tool-overview-action">
-              Statistiken öffnen
-              <FiExternalLink aria-hidden="true" />
-            </span>
-          </a>
         </div>
       </section>
     </>

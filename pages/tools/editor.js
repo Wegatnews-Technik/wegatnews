@@ -1,13 +1,26 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
+import {
+  FiAlertTriangle,
+  FiCalendar,
+  FiCode,
+  FiDownload,
+  FiHash,
+  FiLink,
+  FiSettings,
+  FiTag,
+  FiEdit3,
+  FiUser,
+  FiX,
+} from "react-icons/fi";
 
 const MarkdownCkEditor = dynamic(
   () => import("../../components/MarkdownCkEditor"),
   {
     ssr: false,
     loading: () => (
-      <div className="editor-content editor-loading">
+      <div className="editor-loading">
         Editor lädt ...
       </div>
     ),
@@ -40,7 +53,9 @@ function normalizeText(
 
   return text
     .split("\n")
-    .map((line) => line.replace(/[\t ]+/g, " ").trim())
+    .map((line) =>
+      line.replace(/[\t ]+/g, " ").trim(),
+    )
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
@@ -100,15 +115,21 @@ function markdownToPlainText(markdown) {
 }
 
 export default function EditorPage() {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date()
+    .toISOString()
+    .split("T")[0];
 
-  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [advancedOpen, setAdvancedOpen] =
+    useState(false);
+
   const [title, setTitle] = useState("");
-  const [articleNumber, setArticleNumber] = useState("");
+  const [articleNumber, setArticleNumber] =
+    useState("");
   const [slug, setSlug] = useState("");
   const [date, setDate] = useState(today);
   const [author, setAuthor] = useState("");
-  const [imageSource, setImageSource] = useState("");
+  const [imageSource, setImageSource] =
+    useState("");
   const [preview, setPreview] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [tags, setTags] = useState([]);
@@ -146,12 +167,14 @@ export default function EditorPage() {
       trim: true,
     });
 
-    if (!cleaned) return;
+    if (!cleaned) {
+      return;
+    }
 
-    setTags((prev) =>
-      prev.includes(cleaned)
-        ? prev
-        : [...prev, cleaned],
+    setTags((previous) =>
+      previous.includes(cleaned)
+        ? previous
+        : [...previous, cleaned],
     );
   };
 
@@ -161,8 +184,10 @@ export default function EditorPage() {
   };
 
   const removeTag = (tagToRemove) => {
-    setTags((prev) =>
-      prev.filter((tag) => tag !== tagToRemove),
+    setTags((previous) =>
+      previous.filter(
+        (tag) => tag !== tagToRemove,
+      ),
     );
   };
 
@@ -172,6 +197,7 @@ export default function EditorPage() {
       event.key === ","
     ) {
       event.preventDefault();
+
       addTag();
     }
 
@@ -180,7 +206,9 @@ export default function EditorPage() {
       !tagInput &&
       tags.length > 0
     ) {
-      setTags((prev) => prev.slice(0, -1));
+      setTags((previous) =>
+        previous.slice(0, -1),
+      );
     }
   };
 
@@ -191,14 +219,18 @@ export default function EditorPage() {
     return [
       "---",
       `title: ${yamlString(title)}`,
-      `articleNumber: ${yamlString(articleNumber)}`,
+      `articleNumber: ${yamlString(
+        articleNumber,
+      )}`,
       `slug: ${yamlString(slug)}`,
       `date: ${yamlString(date)}`,
       `author: ${yamlString(author)}`,
       `image: ${yamlString(
         `/article-images/${articleNumber.trim()}.webp`,
       )}`,
-      `image_source: ${yamlString(imageSource)}`,
+      `image_source: ${yamlString(
+        imageSource,
+      )}`,
       `preview: ${yamlString(preview)}`,
       `tags: [${tags
         .map((tag) => yamlString(tag))
@@ -224,7 +256,9 @@ export default function EditorPage() {
   }, [buildMarkdown]);
 
   const downloadMarkdown = () => {
-    if (!isValidPost) return;
+    if (!isValidPost) {
+      return;
+    }
 
     const md = buildMarkdown();
 
@@ -233,12 +267,14 @@ export default function EditorPage() {
     });
 
     const url = URL.createObjectURL(blob);
+
     const link = document.createElement("a");
 
     link.href = url;
     link.download = `${articleNumber.trim()}.md`;
 
     document.body.appendChild(link);
+
     link.click();
     link.remove();
 
@@ -251,6 +287,7 @@ export default function EditorPage() {
         <title>
           Blog Post Editor | WE G(A)T NEWS
         </title>
+
         <meta
           name="description"
           content="Blog Post Editor für WE G(A)T NEWS"
@@ -258,221 +295,391 @@ export default function EditorPage() {
       </Head>
 
       <section className="editor-page">
-        <h1>Blog Post Editor</h1>
-
-        <input
-          type="text"
-          placeholder="Titel (max. 70 Zeichen)"
-          value={title}
-          onChange={(event) =>
-            setTitle(
-              normalizeText(event.target.value, {
-                singleLine: true,
-              }),
-            )
-          }
-          className={`editor-input ${
-            titleTooLong
-              ? "editor-input-error"
-              : ""
-          }`.trim()}
-        />
-
-        <div className="editor-char-count">
-          {title.length}/70
-        </div>
-
-        <input
-          type="text"
-          inputMode="numeric"
-          pattern="[0-9]*"
-          placeholder="Artikelnummer (gleich wie Bild)"
-          value={articleNumber}
-          onChange={(event) =>
-            setArticleNumber(
-              normalizeText(event.target.value, {
-                singleLine: true,
-                trim: true,
-              }),
-            )
-          }
-          className={`editor-input ${
-            articleNumber.trim() &&
-            !articleNumberValid
-              ? "editor-input-error"
-              : ""
-          }`.trim()}
-        />
-
-        {articleNumber.trim() &&
-        !articleNumberValid ? (
-          <div className="editor-error-box">
-            Die Artikelnummer darf nur Zahlen
-            enthalten.
+        <header className="editor-page-header">
+          <div
+            className="editor-page-icon"
+            aria-hidden="true"
+          >
+            <FiEdit3 />
           </div>
-        ) : null}
 
-        <input
-          type="date"
-          value={date}
-          onChange={(event) =>
-            setDate(event.target.value)
-          }
-          className="editor-input"
-        />
+          <div>
+            <h1>Blog Post Editor</h1>
 
-        <input
-          type="text"
-          placeholder="Autor (Vorname, Klassenstufe, z. B. Clara, 10. Klasse)"
-          value={author}
-          onChange={(event) =>
-            setAuthor(
-              normalizeText(event.target.value, {
-                singleLine: true,
-              }),
-            )
-          }
-          className="editor-input"
-        />
+            <p>
+              Metadaten ausfüllen, Artikel schreiben
+              und anschließend als Markdown-Datei
+              herunterladen.
+            </p>
+          </div>
+        </header>
 
-        <input
-          type="text"
-          placeholder="Bild-Link (rechtliche Bildquelle)"
-          value={imageSource}
-          onChange={(event) =>
-            setImageSource(
-              normalizeText(event.target.value, {
-                singleLine: true,
-              }),
-            )
-          }
-          className="editor-input"
-        />
-
-        <textarea
-          rows={2}
-          placeholder="Textvorschau (ein interessanter Anfang, der neugierig macht; max. 120 Zeichen)"
-          value={preview}
-          onChange={(event) =>
-            setPreview(
-              normalizeText(event.target.value, {
-                singleLine: true,
-              }),
-            )
-          }
-          className={`editor-textarea ${
-            previewTooLong
-              ? "editor-input-error"
-              : ""
-          }`.trim()}
-        />
-
-        <div className="editor-char-count">
-          {preview.length}/120
-        </div>
-
-        <div className="editor-tag-defaults">
-          {DEFAULT_TAGS.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() =>
-                tags.includes(tag)
-                  ? removeTag(tag)
-                  : addTagValue(tag)
-              }
-              className={`editor-tag-default-button ${
-                tags.includes(tag)
-                  ? "enabled-tag"
-                  : ""
-              }`.trim()}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        {advancedOpen ? (
-          <div className="editor-tags-box">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="editor-tag-chip"
+        <div className="editor-card">
+          <div className="editor-field">
+            <div className="editor-label-row">
+              <label
+                htmlFor="editor-title"
+                className="editor-label"
               >
-                {tag}
+                Titel
+              </label>
 
-                <button
-                  type="button"
-                  onClick={() => removeTag(tag)}
-                  className="editor-tag-remove"
-                  aria-label={`Tag ${tag} entfernen`}
-                >
-                  ×
-                </button>
+              <span
+                className={`editor-char-count ${
+                  titleTooLong
+                    ? "is-error"
+                    : ""
+                }`.trim()}
+              >
+                {title.length}/70
               </span>
-            ))}
+            </div>
 
             <input
-              value={tagInput}
+              id="editor-title"
+              type="text"
+              placeholder="Titel des Artikels"
+              value={title}
               onChange={(event) =>
-                setTagInput(
+                setTitle(
                   normalizeText(
                     event.target.value,
                     {
                       singleLine: true,
-                      trim: true,
                     },
                   ),
                 )
               }
-              onKeyDown={handleTagKeyDown}
-              onBlur={addTag}
-              placeholder="Eigener Tag"
-              className="editor-tag-input"
+              className={`editor-input ${
+                titleTooLong
+                  ? "editor-input-error"
+                  : ""
+              }`.trim()}
             />
           </div>
-        ) : null}
 
-        {advancedOpen ? (
-          <input
-            value={slug}
-            readOnly
-            aria-label="Slug"
-            className="editor-input editor-read-only"
+          <div className="editor-field-grid">
+            <div className="editor-field">
+              <label
+                htmlFor="editor-article-number"
+                className="editor-label"
+              >
+      
+                Artikelnummer
+              </label>
+
+              <input
+                id="editor-article-number"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                placeholder="z. B. 44"
+                value={articleNumber}
+                onChange={(event) =>
+                  setArticleNumber(
+                    normalizeText(
+                      event.target.value,
+                      {
+                        singleLine: true,
+                        trim: true,
+                      },
+                    ),
+                  )
+                }
+                className={`editor-input ${
+                  articleNumber.trim() &&
+                  !articleNumberValid
+                    ? "editor-input-error"
+                    : ""
+                }`.trim()}
+              />
+            </div>
+
+            <div className="editor-field">
+              <label
+                htmlFor="editor-date"
+                className="editor-label"
+              >
+                <FiCalendar aria-hidden="true" />
+                Datum
+              </label>
+
+              <input
+                id="editor-date"
+                type="date"
+                value={date}
+                onChange={(event) =>
+                  setDate(event.target.value)
+                }
+                className="editor-input"
+              />
+            </div>
+          </div>
+
+          {articleNumber.trim() &&
+          !articleNumberValid ? (
+            <div className="editor-message editor-message-error">
+              <FiAlertTriangle
+                aria-hidden="true"
+              />
+
+              <span>
+                Die Artikelnummer darf nur Zahlen
+                enthalten.
+              </span>
+            </div>
+          ) : null}
+
+          <div className="editor-field-grid">
+            <div className="editor-field">
+              <label
+                htmlFor="editor-author"
+                className="editor-label"
+              >
+                <FiUser aria-hidden="true" />
+                Autor
+              </label>
+
+              <input
+                id="editor-author"
+                type="text"
+                placeholder="Clara, 10. Klasse"
+                value={author}
+                onChange={(event) =>
+                  setAuthor(
+                    normalizeText(
+                      event.target.value,
+                      {
+                        singleLine: true,
+                      },
+                    ),
+                  )
+                }
+                className="editor-input"
+              />
+            </div>
+
+            <div className="editor-field">
+              <label
+                htmlFor="editor-image-source"
+                className="editor-label"
+              >
+                <FiLink aria-hidden="true" />
+                Bildquelle
+              </label>
+
+              <input
+                id="editor-image-source"
+                type="text"
+                placeholder="Link zur rechtlichen Bildquelle"
+                value={imageSource}
+                onChange={(event) =>
+                  setImageSource(
+                    normalizeText(
+                      event.target.value,
+                      {
+                        singleLine: true,
+                      },
+                    ),
+                  )
+                }
+                className="editor-input"
+              />
+            </div>
+          </div>
+
+          <div className="editor-field">
+            <div className="editor-label-row">
+              <label
+                htmlFor="editor-preview"
+                className="editor-label"
+              >
+                Vorschautext
+              </label>
+
+              <span
+                className={`editor-char-count ${
+                  previewTooLong
+                    ? "is-error"
+                    : ""
+                }`.trim()}
+              >
+                {preview.length}/120
+              </span>
+            </div>
+
+            <textarea
+              id="editor-preview"
+              rows={3}
+              placeholder="Ein kurzer Einstieg, der neugierig macht ..."
+              value={preview}
+              onChange={(event) =>
+                setPreview(
+                  normalizeText(
+                    event.target.value,
+                    {
+                      singleLine: true,
+                    },
+                  ),
+                )
+              }
+              className={`editor-textarea ${
+                previewTooLong
+                  ? "editor-input-error"
+                  : ""
+              }`.trim()}
+            />
+          </div>
+
+          <div className="editor-field">
+            <div className="editor-label">
+              <FiTag aria-hidden="true" />
+              Tags
+            </div>
+
+            <div className="editor-tag-defaults">
+              {DEFAULT_TAGS.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() =>
+                    tags.includes(tag)
+                      ? removeTag(tag)
+                      : addTagValue(tag)
+                  }
+                  className={`editor-tag-default-button ${
+                    tags.includes(tag)
+                      ? "enabled-tag"
+                      : ""
+                  }`.trim()}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() =>
+              setAdvancedOpen(
+                (previous) => !previous,
+              )
+            }
+            className="editor-advanced-toggle"
+            aria-expanded={advancedOpen}
+          >
+            <FiSettings aria-hidden="true" />
+
+            {advancedOpen
+              ? "Advanced schließen"
+              : "Advanced"}
+          </button>
+
+          {advancedOpen ? (
+            <div className="editor-advanced-panel">
+              <div className="editor-field">
+                <label
+                  htmlFor="editor-custom-tag"
+                  className="editor-label"
+                >
+                  <FiTag aria-hidden="true" />
+                  Eigene Tags
+                </label>
+
+                <div className="editor-tags-box">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="editor-tag-chip"
+                    >
+                      {tag}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          removeTag(tag)
+                        }
+                        className="editor-tag-remove"
+                        aria-label={`Tag ${tag} entfernen`}
+                      >
+                        <FiX aria-hidden="true" />
+                      </button>
+                    </span>
+                  ))}
+
+                  <input
+                    id="editor-custom-tag"
+                    value={tagInput}
+                    onChange={(event) =>
+                      setTagInput(
+                        normalizeText(
+                          event.target.value,
+                          {
+                            singleLine: true,
+                            trim: true,
+                          },
+                        ),
+                      )
+                    }
+                    onKeyDown={handleTagKeyDown}
+                    onBlur={addTag}
+                    placeholder="Tag hinzufügen"
+                    className="editor-tag-input"
+                  />
+                </div>
+              </div>
+
+              <div className="editor-field">
+                <label
+                  htmlFor="editor-slug"
+                  className="editor-label"
+                >
+                  <FiLink aria-hidden="true" />
+                  Slug
+                </label>
+
+                <input
+                  id="editor-slug"
+                  value={slug}
+                  readOnly
+                  className="editor-input editor-read-only"
+                />
+              </div>
+            </div>
+          ) : null}
+        </div>
+
+        <div className="editor-writing-section">
+          <div className="editor-section-heading">
+            <div>
+              <h2>Artikeltext</h2>
+
+              <p>
+                Prüfe nach dem Einfügen aus Word
+                besonders Listen sowie Fett- und
+                Kursivformatierungen.
+              </p>
+            </div>
+          </div>
+
+          <MarkdownCkEditor
+            value={contentMarkdown}
+            onChange={setContentMarkdown}
           />
-        ) : null}
-
-        <p>
-          Formatierung des Textes überprüfen. Es
-          kann sein, dass Listen, Fett- und
-          Kursivformatierungen verloren gehen.
-        </p>
-
-        <button
-          type="button"
-          onClick={() =>
-            setAdvancedOpen(
-              (previous) => !previous,
-            )
-          }
-          className="editor-advanced-toggle"
-        >
-          {advancedOpen
-            ? "Advanced schließen"
-            : "Advanced"}
-        </button>
-
-        <MarkdownCkEditor
-          value={contentMarkdown}
-          onChange={setContentMarkdown}
-        />
+        </div>
 
         {!isValidPost ? (
-          <div className="editor-error-box">
-            Download gesperrt — Titel,
-            Artikelnummer, Vorschau, Autor und Text
-            prüfen. Die Artikelnummer darf nur
-            Zahlen enthalten.
+          <div className="editor-message editor-message-warning">
+            <FiAlertTriangle
+              aria-hidden="true"
+            />
+
+            <span>
+              Download gesperrt — Titel,
+              Artikelnummer, Vorschau, Autor und
+              Artikeltext prüfen.
+            </span>
           </div>
         ) : null}
 
@@ -481,24 +688,25 @@ export default function EditorPage() {
             type="button"
             onClick={downloadMarkdown}
             disabled={!isValidPost}
-            className={`editor-download-button ${
-              !isValidPost
-                ? "editor-disabled-button"
-                : ""
-            }`.trim()}
+            className="editor-download-button"
           >
+            <FiDownload aria-hidden="true" />
             Markdown herunterladen
           </button>
         </div>
 
         {advancedOpen ? (
-          <>
-            <h2>Markdown Preview</h2>
+          <div className="editor-markdown-preview">
+            <div className="editor-section-heading editor-section-heading-inline">
+              <FiCode aria-hidden="true" />
+
+              <h2>Markdown Preview</h2>
+            </div>
 
             <pre className="editor-preview-box">
               {markdown}
             </pre>
-          </>
+          </div>
         ) : null}
       </section>
     </>
