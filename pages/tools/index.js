@@ -8,6 +8,10 @@ export default function ToolsIndexPage() {
       <Link href="/tools/editor">Texteditor</Link>
       <p>Bildbearbeitung:</p>
       <Link href="/tools/converter">Bildconverter</Link>
+      <p>Statistiken:</p >
+      <a href="https://cloud.umami.is/share/j2rKzIhE8t490C1z" target="_blank" rel="noopener noreferrer">
+        Statistiken
+      </a>
     </section>
   );
 }
