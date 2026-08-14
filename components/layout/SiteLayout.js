@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { href: "/buchrezension", label: "Buchrezensionen 📕" },
   { href: "/ueber-uns", label:"Über uns 🏠"},
   { href: "/mach-mit", label: "Mach mit 👋" },
+  { href: "/tools", label: "Tools 🔧" },
 ];
 
 
