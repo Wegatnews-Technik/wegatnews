@@ -65,8 +65,9 @@ nav > ul li a:hover {
   background: var(--color-brand-hover);
 }
 
-nav > ul li a[aria-current="page"] {
-    background: var(--color-action);
+ul li a[aria-current="page"] {
+    color: var(--color-brand);
+    background: var(--color-page);
 }
 
 .menu-toggle {
@@ -194,6 +195,10 @@ footer p {
     font: var(--p);
     text-decoration: none;
     transition: background-color var(--transition-fast);
+  }
+
+  .sidebar ul li a[aria-current] {
+      color: var(--color-brand);
   }
 
   .sidebar ul li a:hover {
