@@ -4,15 +4,16 @@ import "../styles/layout.css";
 import "../styles/components.css";
 import "../styles/post.css";
 import "../styles/tools.css";
+import "../styles/editor.css";
+import "../styles/converter.css";
+
 import "ckeditor5/ckeditor5.css";
 import SiteLayout from "../components/layout/SiteLayout";
 
 export default function App({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page);
-
   return (
     <SiteLayout posts={pageProps}>
-      {getLayout(<Component {...pageProps} />)}
+      <Component {...pageProps} />
     </SiteLayout>
   );
 }
