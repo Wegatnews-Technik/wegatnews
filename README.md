@@ -4,12 +4,12 @@ Statische Website der digitalen Schülerzeitung am Gymnasium zum Altenforst in T
 
 - Live-Seite: [wegatnews.de](https://wegatnews.de)
 - Artikel: Markdown-Dateien im Repository
-- Hosting und Deployments: Netlify
+- Hosting und Deployments: Cloudflare Pages
 - Artikel-Workflow: GitHub Actions und Pull Requests
 
 ## Überblick
 
-WE G(A)T NEWS ist bewusst ohne klassisches CMS aufgebaut. Artikel, Bilder und Quellcode liegen gemeinsam im GitHub-Repository. Next.js erzeugt daraus eine vollständig statische Website, die Netlify veröffentlicht.
+WE G(A)T NEWS ist bewusst ohne klassisches CMS aufgebaut. Artikel, Bilder und Quellcode liegen gemeinsam im GitHub-Repository. Next.js erzeugt daraus eine vollständig statische Website, die Cloudflare Pages veröffentlicht.
 
 Die Redaktion kann neue Beiträge mit den Browser-Werkzeugen unter `/tools` vorbereiten. Ein GitHub-Workflow übernimmt die Dateien anschließend in einen eigenen Branch, prüft den Produktions-Build und erstellt einen Pull Request mit Deploy Preview.
 
@@ -73,7 +73,7 @@ npm run build
 
 `npm run test` wird dabei in einem zweiten Terminal ausgeführt, während `npm run dev` weiterläuft. Der fertige statische Export liegt anschließend in `out/`.
 
-> `npm run start` ist für dieses Projekt nicht der normale Vorschauweg, da `next.config.mjs` einen statischen Export konfiguriert. Für die Entwicklung wird `npm run dev` verwendet; Netlify zeigt den Produktionsstand als Deploy Preview.
+> `npm run start` ist für dieses Projekt nicht der normale Vorschauweg, da `next.config.mjs` einen statischen Export konfiguriert. Für die Entwicklung wird `npm run dev` verwendet; Cloudflare Pages erstellt für Pull Requests Preview-Deployments.
 
 ## npm-Skripte
 
@@ -284,9 +284,9 @@ Die Bildquelle muss separat notiert und im Editor eingetragen werden.
 4. Prüfen, dass Nummer, Frontmatter und Bildpfad übereinstimmen.
 5. Beide Dateien in `neuer-post/` hochladen. Dort sollte nur dieses eine Dateipaar liegen.
 6. In GitHub Actions den Workflow **Neuer Post Preview** manuell starten.
-7. Den automatisch erstellten Pull Request und den Netlify Deploy Preview prüfen, auch auf einem Smartphone.
+7. Den automatisch erstellten Pull Request und das Cloudflare-Pages-Preview-Deployment prüfen, auch auf einem Smartphone.
 8. Den Pull Request über den grünen Merge-Button oder mit dem Kommentar `/publish` veröffentlichen.
-9. Nach dem Netlify-Deploy den Artikel auf der Live-Seite kontrollieren.
+9. Nach dem Cloudflare-Pages-Deployment den Artikel auf der Live-Seite kontrollieren.
 
 ### Was der Preview-Workflow prüft
 
@@ -331,11 +331,14 @@ Artikelseiten erhalten über `components/seo/PostHead.js` einen eigenen Seitenti
 
 ## Hosting und Statistik
 
-Netlify ist mit dem GitHub-Repository verbunden:
+Cloudflare Pages ist mit dem GitHub-Repository verbunden:
 
-- Änderungen auf `main` lösen einen Production Deploy aus.
-- Pull Requests erhalten einen Deploy Preview.
-- Die Domain `wegatnews.de` zeigt auf die Netlify-Seite.
+- Änderungen auf `main` lösen ein Production Deployment aus.
+- Pull Requests erhalten ein Preview-Deployment.
+- Der Build-Befehl ist `npm run build`; das Ausgabeverzeichnis ist `out`.
+- Die Domain `wegatnews.de` zeigt auf die Cloudflare-Pages-Seite.
+
+Damit RSS-Feed, Sitemap und `robots.txt` bei jedem Deployment erzeugt werden, darf der Build-Befehl nicht durch `npx next build` ersetzt werden.
 
 Umami Cloud zählt Seitenaufrufe über das Script in `components/layout/SiteLayout.js`. Bei Änderungen an Deploy Previews sollte geprüft werden, ob interne Vorschau-Aufrufe in der Statistik erfasst werden.
 
@@ -428,9 +431,10 @@ Interne Pfade sind kleingeschrieben. Beispiele:
 Markdown + WebP vorbereiten
 → in neuer-post hochladen
 → GitHub-Workflow starten
-→ Netlify Preview prüfen
+→ Cloudflare-Pages-Preview prüfen
 → Pull Request mergen
 → Live-Seite prüfen
 ```
 
 Für normale Artikel reicht der Browser. Wer am Quellcode arbeitet, verwendet lokal `npm ci`, `npm run dev`, `npm run test`, `npm run lint` und `npm run build`. Vor dem ersten Playwright-Testlauf auf einem neuen Rechner ist außerdem einmal `npx playwright install` nötig. Für `npm run test` muss `npm run dev` aktuell parallel in einem zweiten Terminal laufen.
+
