@@ -6,6 +6,8 @@ import "../styles/post.css";
 import "../styles/tools.css";
 import "../styles/editor.css";
 import "../styles/converter.css";
+import "../styles/pagination.css";
+
 
 import "ckeditor5/ckeditor5.css";
 import SiteLayout from "../components/layout/SiteLayout";

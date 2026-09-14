@@ -37,3 +37,26 @@ test("Navbar links", async ({ page }) => {
 //   await page.getByRole("link", { name: newestPost.tag }).click();
 //   await expect(page.getByText(newestPost.tags)).toBeVisible();
 // });
+test("Post-Pagination", async ({ page }) => {
+  await page.goto("http://localhost:3000/");
+
+  const pagination = page.getByRole("navigation", {
+    name: "Pagination",
+  });
+
+  await expect(pagination).toBeVisible();
+
+  await pagination
+    .getByRole("link", { name: "Zu Seite 2" })
+    .click();
+
+  await expect(page).toHaveURL(/\/seite\/2\/?$/);
+
+  await expect(
+    page.getByRole("heading", {
+      name: "Alle Artikel – Seite 2",
+    }),
+  ).toBeVisible();
+
+  await expect(page.locator(".blog-entry")).toHaveCount(12);
+});
