@@ -44,17 +44,19 @@ test("Post-Pagination", async ({ page }) => {
     name: "Pagination",
   });
 
-  await expect(pagination).toBeVisible();
-
   await pagination
     .getByRole("link", { name: "Zu Seite 2" })
     .click();
 
   await expect(page).toHaveURL(/\/seite\/2\/?$/);
 
+  const pageTwoPagination = page.getByRole("navigation", {
+    name: "Pagination",
+  });
+
   await expect(
-    page.getByRole("heading", {
-      name: "Alle Artikel – Seite 2",
+    pageTwoPagination.getByRole("link", {
+      name: "Seite 2, aktuelle Seite",
     }),
   ).toBeVisible();
 
