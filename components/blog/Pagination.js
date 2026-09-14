@@ -19,10 +19,6 @@ export default function Pagination({
 }) {
   const router = useRouter();
 
-  if (pageCount <= 1) {
-    return null;
-  }
-
   function handlePageChange({ selected }) {
     const page = selected + 1;
     router.push(getPageHref(basePath, page));

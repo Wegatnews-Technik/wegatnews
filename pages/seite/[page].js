@@ -42,10 +42,6 @@ export default function PostsPage({
         </title>
       </Head>
 
-      <div className="welcome-container">
-        <h1>Alle Artikel – Seite {currentPage}</h1>
-      </div>
-
       <PostListing
         posts={posts}
         currentPage={currentPage}
