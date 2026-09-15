@@ -1,38 +1,20 @@
 import { getAllPosts } from "../lib/posts";
-import PostGrid from "../components/blog/PostGrid";
-import ArchiveList from "../components/blog/ArchiveList";
-import ShareButton from "../components/layout/ShareButton";
+import { getPageData } from "../lib/pagination";
+import PostListing from "../components/blog/PostListing";
 
 export async function getStaticProps() {
-  const posts = getAllPosts();
+  const pageData = getPageData(getAllPosts(), 1);
 
   return {
-    props: {
-      newestPosts: posts.slice(0, 24),
-      archivePosts: posts.slice(24),
-    },
+    props: pageData,
   };
 }
 
-function chunkPosts(posts, size) {
-  const chunks = [];
-
-  for (let index = 0; index < posts.length; index += size) {
-    chunks.push(posts.slice(index, index + size));
-  }
-
-  return chunks;
-}
-
-function NewestPosts({ posts }) {
-  return (
-    <section className="blog-section">
-      <PostGrid posts={posts} />
-    </section>
-  );
-}
-
-export default function Blog({ newestPosts, archivePosts }) {
+export default function Blog({
+  posts,
+  currentPage,
+  pageCount,
+}) {
   return (
     <>
       <div className="welcome-container">
@@ -41,27 +23,31 @@ export default function Blog({ newestPosts, archivePosts }) {
         </h2>
       </div>
 
-      <NewestPosts posts={newestPosts} />
+      <PostListing
+        posts={posts}
+        currentPage={currentPage}
+        pageCount={pageCount}
+        basePath="/"
+      />
 
       <section>
         <div className="image-or-text">
           <h2>Ideen, Artikel, Probleme, Fragen?</h2>
+
           <p>
             Einfach per Teams oder E-Mail an Vincent Cui (Technik), oder an
             Ouijdan Hussein (Inhalt)
           </p>
+
           <p>wegatnews@outlook.de</p>
+
           <p>
             Wir treffen uns jeden Donnerstag in der Mittagspause vor den
             Computerräumen.
           </p>
+
           <p>Komm doch einfach mal vorbei!</p>
         </div>
-      </section>
-
-      <section>
-        <h1 className="archiv">Archiv</h1>
-        <ArchiveList posts={archivePosts} />
       </section>
     </>
   );

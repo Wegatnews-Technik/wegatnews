@@ -1,45 +1,22 @@
 import { getPostsByTag } from "../../lib/posts";
-import PostGrid from "../../components/blog/PostGrid";
+import { getPageData } from "../../lib/pagination";
+import { CATEGORIES } from "../../lib/categories";
+import CategoryPage from "../../components/blog/CategoryPage";
 
-export async function getStaticProps() {
-  const meinung_posts = getPostsByTag("Meinung");
+const category = CATEGORIES.meinung;
 
+export function getStaticProps() {
   return {
-    props: {
-      posts: meinung_posts,
-    },
+    props: getPageData(getPostsByTag(category.tag), 1),
   };
 }
 
-function chunkPosts(posts, size) {
-  const chunks = [];
-
-  for (let index = 0; index < posts.length; index += size) {
-    chunks.push(posts.slice(index, index + size));
-  }
-
-  return chunks;
-}
-
-function NewestPosts({ posts }) {
+export default function MeinungIndex(props) {
   return (
-    <section className="blog-section">
-      {chunkPosts(posts, 4).map((group, index) => (
-        <PostGrid key={index} posts={group} />
-      ))}
-    </section>
-  );
-}
-
-export default function MeinungIndex({ posts }) {
-  return (
-    <main>
-      <div className="welcome-container">
-        <h1>Meinung 💣</h1>
-        <p>Eigene Ansichten, provokative Diskussionen, Satire</p>
-      </div>
-        <NewestPosts posts={posts} />
-
-    </main>
+    <CategoryPage
+      {...props}
+      {...category}
+      basePath="/meinung"
+    />
   );
 }

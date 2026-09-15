@@ -1,44 +1,22 @@
 import { getPostsByTag } from "../../lib/posts";
-import PostGrid from "../../components/blog/PostGrid";
+import { getPageData } from "../../lib/pagination";
+import { CATEGORIES } from "../../lib/categories";
+import CategoryPage from "../../components/blog/CategoryPage";
 
-export async function getStaticProps() {
-  const umfragen_posts = getPostsByTag("Umfrage");
+const category = CATEGORIES.umfragen;
 
+export function getStaticProps() {
   return {
-    props: {
-      posts: umfragen_posts,
-    },
+    props: getPageData(getPostsByTag(category.tag), 1),
   };
 }
 
-function chunkPosts(posts, size) {
-  const chunks = [];
-
-  for (let index = 0; index < posts.length; index += size) {
-    chunks.push(posts.slice(index, index + size));
-  }
-
-  return chunks;
-}
-
-function NewestPosts({ posts }) {
+export default function UmfragenIndex(props) {
   return (
-    <section className="blog-section">
-      {chunkPosts(posts, 4).map((group, index) => (
-        <PostGrid key={index} posts={group} />
-      ))}
-    </section>
-  );
-}
-
-export default function UmfragenIndex({ posts }) {
-  return (
-    <main>
-      <div className="welcome-container">
-        <h1>Umfragen 🎤</h1>
-        <p>Interessante Umfragen zu aktuellen Themen</p>
-      </div>
-      <NewestPosts posts={posts} />
-    </main>
+    <CategoryPage
+      {...props}
+      {...category}
+      basePath="/umfragen"
+    />
   );
 }
