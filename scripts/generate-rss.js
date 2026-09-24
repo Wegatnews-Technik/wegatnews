@@ -1,6 +1,7 @@
 import { Feed } from "feed";
 import { writeFileSync } from "fs";
 import { getAllPosts } from "../lib/posts.js";
+import { POSTS_PER_PAGE } from "../lib/pagination.js";
 
 /*Preview
   Autor
@@ -12,7 +13,7 @@ const SITE_TITLE = "WE G(A)T NEWS - Die Schülerzeitung am GAT";
 const SITE_DESCRIPTION =
   "Willkommen auf wegatnews, der digitalen Schülerzeitung am Altenforst.";
 
-const posts = getAllPosts();
+const posts = getAllPosts().slice(0, POSTS_PER_PAGE);
 
 const feed = new Feed({
   title: SITE_TITLE,
