@@ -26,17 +26,22 @@ const feed = new Feed({
 });
 
 posts.forEach((post) => {
+  let categories = [];
+  post.tags.forEach((tag) => {
+    categories = categories.concat({ name: tag });
+  });
+  console.log(categories);
+
   feed.addItem({
     title: post.title,
     id: `${post.slug}`,
     link: `${SITE_URL}/blog/${post.slug}/`,
     description: post.preview,
     image: `${SITE_URL}${post.image}`,
-    author: {
-      name: post.author,
-      email: "wegatnews@outlook.de",
-      link: "https://wegatnews.de/",
-    },
+    author: [
+      { name: post.author },
+    ],
+    category: categories,
     date: new Date(post.date),
   });
 });
