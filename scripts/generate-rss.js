@@ -3,10 +3,6 @@ import { writeFileSync } from "fs";
 import { getAllPosts } from "../lib/posts.js";
 import { POSTS_PER_PAGE } from "../lib/pagination.js";
 
-/*Preview
-  Autor
-  Bild
-  (Datum(falsches Format))*/
 
 const SITE_URL = "https://wegatnews.de";
 const SITE_TITLE = "WE G(A)T NEWS - Die Schülerzeitung am GAT";
@@ -31,7 +27,6 @@ posts.forEach((post) => {
   post.tags.forEach((tag) => {
     categories = categories.concat({ name: tag });
   });
-  console.log(categories);
 
   feed.addItem({
     title: post.title,
