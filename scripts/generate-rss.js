@@ -1,18 +1,15 @@
 import { Feed } from "feed";
 import { writeFileSync } from "fs";
 import { getAllPosts } from "../lib/posts.js";
+import { POSTS_PER_PAGE } from "../lib/pagination.js";
 
-/*Preview
-  Autor
-  Bild
-  (Datum(falsches Format))*/
 
 const SITE_URL = "https://wegatnews.de";
 const SITE_TITLE = "WE G(A)T NEWS - Die Schülerzeitung am GAT";
 const SITE_DESCRIPTION =
   "Willkommen auf wegatnews, der digitalen Schülerzeitung am Altenforst.";
 
-const posts = getAllPosts();
+const posts = getAllPosts().slice(0, POSTS_PER_PAGE);
 
 const feed = new Feed({
   title: SITE_TITLE,
@@ -26,17 +23,21 @@ const feed = new Feed({
 });
 
 posts.forEach((post) => {
+  let categories = [];
+  post.tags.forEach((tag) => {
+    categories = categories.concat({ name: tag });
+  });
+
   feed.addItem({
     title: post.title,
     id: `${post.slug}`,
     link: `${SITE_URL}/blog/${post.slug}/`,
     description: post.preview,
     image: `${SITE_URL}${post.image}`,
-    author: {
-      name: post.author,
-      email: "wegatnews@outlook.de",
-      link: "https://wegatnews.de/",
-    },
+    author: [
+      { name: post.author },
+    ],
+    category: categories,
     date: new Date(post.date),
   });
 });
