@@ -1,3 +1,4 @@
+import { getHighestPostNumber } from "../../lib/posts";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
@@ -13,6 +14,16 @@ import {
   FiUser,
   FiX,
 } from "react-icons/fi";
+
+export async function getStaticProps() {
+  const defaultPostNumber = (Number(getHighestPostNumber())+1).toString();
+
+  return {
+    props: {
+      defaultPostNumber: defaultPostNumber,
+    }
+  };
+}
 
 const MarkdownCkEditor = dynamic(
   () => import("../../components/MarkdownCkEditor"),
@@ -113,7 +124,7 @@ function markdownToPlainText(markdown) {
     .trim();
 }
 
-export default function EditorPage() {
+export default function EditorPage({ defaultPostNumber }) {
   const today = new Date()
     .toISOString()
     .split("T")[0];
@@ -123,7 +134,7 @@ export default function EditorPage() {
 
   const [title, setTitle] = useState("");
   const [articleNumber, setArticleNumber] =
-    useState("");
+    useState(defaultPostNumber);
   const [slug, setSlug] = useState("");
   const [date, setDate] = useState(today);
   const [author, setAuthor] = useState("");
@@ -363,7 +374,7 @@ export default function EditorPage() {
                 htmlFor="editor-article-number"
                 className="editor-label"
               >
-      
+
                 Artikelnummer
               </label>
 
