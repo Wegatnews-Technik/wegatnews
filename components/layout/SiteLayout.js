@@ -6,21 +6,17 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 import { FiSearch } from "react-icons/fi";
-import { CATEGORIES } from "@/lib/categories";
 
 
-const PATHS = [
-  { href: "/ueber-uns", label: "Über uns 🏠" },
+const NAV_ITEMS = [
+  { href: "/informativ", label: "Informativ 📖" },
+  { href: "/meinung", label: "Meinung 💣" },
+  { href: "/umfragen", label: "Umfragen 🎤" },
+  { href: "/buchrezension", label: "Buchrezensionen 📕" },
+  { href: "/ueber-uns", label:"Über uns 🏠"},
   { href: "/tools", label: "Tools 🔧" },
   { href: "/mach-mit", label: "Mach mit 👋" },
 ];
-
-const NAV_ITEMS = Object.entries(CATEGORIES).map(category => {
-  return {
-    href: `/${category[0]}`,
-    label: category[1].title,
-  };
-}).concat(PATHS);
 
 
 function NavigationItems({ currentPath, onNavigate }) {
