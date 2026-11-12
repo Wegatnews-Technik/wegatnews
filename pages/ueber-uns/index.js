@@ -11,8 +11,8 @@ export default function UeberUnsIndex() {
             <p>
               Die Schülerzeitung wurde gegründet, um Schülern eine Plattform zu
               bieten, auf der sie interessante Artikel und Meinungen
-              veröffentlichen können. 
-              
+              veröffentlichen können.
+
               Unsere Mission ist es, unterschiedliche
               Stimmen in unserer Schule hörbar zu machen und Themen
               anzusprechen, die oft überstehen werden. Die Schülerzeitung ist
@@ -35,7 +35,8 @@ export default function UeberUnsIndex() {
           <div className="image-or-text">
             <h2>Team</h2>
             <p>
-              Amaya
+              Aliya
+              <br /> Amaya
               <br /> Aurelia
               <br /> Benjamin
               <br /> Charlotte
@@ -44,6 +45,7 @@ export default function UeberUnsIndex() {
               <br /> Ibrahim
               <br /> Jason
               <br /> Karlotta
+              <br /> Lina
               <br /> Maja
               <br /> Matilda
               <br /> Melanie
