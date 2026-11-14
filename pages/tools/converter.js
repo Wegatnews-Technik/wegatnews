@@ -14,6 +14,9 @@ import {
 export const TARGET_WIDTH = 1200;
 export const TARGET_HEIGHT = 800;
 
+export const POSTER_WIDTH = 800;
+export const POSTER_HEIGHT = 1200;
+
 export default function ImageConverterPage() {
   const [previewUrl, setPreviewUrl] =
     useState(null);
@@ -23,6 +26,12 @@ export default function ImageConverterPage() {
 
   const [fileName, setFileName] =
     useState("");
+
+  const [posterMode, setPosterMode] =
+    useState(false);
+
+  const [targetSize, setTargetSize] =
+    useState([TARGET_WIDTH, TARGET_HEIGHT]);
 
   const [originalSize, setOriginalSize] =
     useState([
@@ -90,8 +99,8 @@ export default function ImageConverterPage() {
       const canvas =
         document.createElement("canvas");
 
-      canvas.width = TARGET_WIDTH;
-      canvas.height = TARGET_HEIGHT;
+      canvas.width = targetSize[0];
+      canvas.height = targetSize[1];
 
       const ctx =
         canvas.getContext("2d");
@@ -107,8 +116,8 @@ export default function ImageConverterPage() {
       ctx.fillRect(
         0,
         0,
-        TARGET_WIDTH,
-        TARGET_HEIGHT,
+        targetSize[0],
+        targetSize[1],
       );
 
       setOriginalSize([
@@ -117,8 +126,8 @@ export default function ImageConverterPage() {
       ]);
 
       const scale = Math.max(
-        TARGET_WIDTH / imageBitmap.width,
-        TARGET_HEIGHT / imageBitmap.height,
+        targetSize[0] / imageBitmap.width,
+        targetSize[1] / imageBitmap.height,
       );
 
       const drawWidth =
@@ -128,10 +137,10 @@ export default function ImageConverterPage() {
         imageBitmap.height * scale;
 
       const offsetX =
-        (TARGET_WIDTH - drawWidth) / 2;
+        (targetSize[0] - drawWidth) / 2;
 
       const offsetY =
-        (TARGET_HEIGHT - drawHeight) / 2;
+        (targetSize[1] - drawHeight) / 2;
 
       ctx.drawImage(
         imageBitmap,
@@ -212,7 +221,7 @@ export default function ImageConverterPage() {
 
             <p>
               Bilder automatisch auf{" "}
-              {TARGET_WIDTH} × {TARGET_HEIGHT} px
+              {targetSize[0]} × {targetSize[1]} px
               zuschneiden und als WebP speichern.
             </p>
           </div>
@@ -240,7 +249,7 @@ export default function ImageConverterPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Unsplash 
+              Unsplash
               <FiExternalLink
                 aria-hidden="true"
               />
@@ -267,6 +276,32 @@ export default function ImageConverterPage() {
                 aria-hidden="true"
               />
             </a>
+          </div>
+
+          <div className="converter-field">
+            <label
+              htmlFor="converter-poster-mode"
+              className="converter-label"
+            >
+              Poster-Modus
+            </label>
+
+            <input
+              id="converter-poster-mode"
+              type="checkbox"
+              role="switch"
+              checked={posterMode}
+              onChange={(event) => {
+                setPosterMode(event.target.checked);
+                if (event.target.checked) {
+                  setTargetSize([POSTER_WIDTH, POSTER_HEIGHT]);
+                }
+                else {
+                  setTargetSize([TARGET_WIDTH, TARGET_HEIGHT]);
+                }
+              }}
+              className="converter-input"
+            />
           </div>
 
           <div className="converter-field">
@@ -410,13 +445,13 @@ export default function ImageConverterPage() {
                     src={result.url}
                     className="converter-image"
                     alt="Konvertiertes Bild"
-                    width={TARGET_WIDTH}
-                    height={TARGET_HEIGHT}
+                    width={targetSize[0]}
+                    height={targetSize[1]}
                   />
 
                   <p className="converter-image-meta">
-                    {TARGET_WIDTH} ×{" "}
-                    {TARGET_HEIGHT} px ·{" "}
+                    {targetSize[0]} ×{" "}
+                    {targetSize[1]} px ·{" "}
                     {result.sizeKB} KB
                   </p>
                 </article>
