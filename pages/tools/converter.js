@@ -10,11 +10,22 @@ import {
   FiInfo,
   FiUploadCloud,
 } from "react-icons/fi";
+import { getHighestPostNumber } from "@/lib/posts";
 
 export const TARGET_WIDTH = 1200;
 export const TARGET_HEIGHT = 800;
 
-export default function ImageConverterPage() {
+export async function getStaticProps() {
+  const defaultPostNumber = (Number(getHighestPostNumber())+1).toString();
+
+  return {
+    props: {
+      defaultPostNumber: defaultPostNumber,
+    }
+  };
+}
+//Versuche Cloudfare bot auszuloesen
+export default function ImageConverterPage({ defaultPostNumber }) {
   const [previewUrl, setPreviewUrl] =
     useState(null);
 
@@ -22,7 +33,7 @@ export default function ImageConverterPage() {
   const [error, setError] = useState(null);
 
   const [fileName, setFileName] =
-    useState("");
+    useState(defaultPostNumber);
 
   const [originalSize, setOriginalSize] =
     useState([
@@ -240,7 +251,7 @@ export default function ImageConverterPage() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Unsplash 
+              Unsplash
               <FiExternalLink
                 aria-hidden="true"
               />
