@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
     event.stopPropagation();
 
     const articleUrl = `${window.location.origin}/blog/${post.slug}`;
-
+  //comment to trigger cloudfare bot
     try {
       if (navigator.share) {
         await navigator.share({
