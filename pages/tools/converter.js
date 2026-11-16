@@ -24,7 +24,7 @@ export async function getStaticProps() {
     }
   };
 }
-
+//Versuche Cloudfare bot auszuloesen
 export default function ImageConverterPage({ defaultPostNumber }) {
   const [previewUrl, setPreviewUrl] =
     useState(null);
