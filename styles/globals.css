@@ -300,6 +300,10 @@ section > .image-or-text {
   transform: translateY(-1px);
 }
 
+.blog-entry .poster {
+    aspect-ratio: 2/3;
+}
+
 .blog-entry-actions {
   display: flex;
   align-items: center;

@@ -74,8 +74,11 @@
   object-fit: cover;
 }
 
-/* Artikeltitel */
+.post-media .poster {
+    aspect-ratio: 2/3;
+}
 
+/* Artikeltitel */
 .post-title {
   max-width: none;
   margin: 0;
