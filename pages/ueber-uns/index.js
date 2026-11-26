@@ -42,7 +42,6 @@ export default function UeberUnsIndex() {
               <br /> Charlotte
               <br /> Clara
               <br /> Danielle
-              <br /> Karlotta
               <br /> Lina
               <br /> Maja
               <br /> Matilda
